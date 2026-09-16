@@ -134,6 +134,7 @@
   @media (max-width:820px){ .areas-grid{ grid-template-columns:repeat(2,1fr); } }
   @media (max-width:520px){ .areas-grid{ grid-template-columns:1fr; } }
   .area-card{ border-radius:var(--radius); padding:22px; }
+  .area-card .photo{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:14px; margin-bottom:14px; display:block; }
   .area-card .icon{ width:44px; height:44px; }
   .area-card h3{ font-size:16.5px; margin-top:12px; }
   .area-card p{ margin-top:6px; font-size:13.5px; }
@@ -573,12 +574,30 @@
       <h2>Cada atividade tem um propósito, não só uma cor bonita</h2>
     </div>
     <div class="areas-grid">
-      <div class="area-card area-1"><svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#2F9BD6"/><path d="M14 30 Q20 16 24 24 T34 18" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg><h3>Coordenação motora e pré-escrita</h3><p>Traçados, recortes e movimentos que preparam a mão para a escrita.</p></div>
-      <div class="area-card area-2"><svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#8B6BD1"/><rect x="14" y="14" width="9" height="9" fill="#fff"/><rect x="25" y="25" width="9" height="9" fill="#fff"/></svg><h3>Raciocínio lógico</h3><p>Desafios de observar, relacionar e resolver com autonomia.</p></div>
-      <div class="area-card area-3"><svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#FF6B6B"/><circle cx="17" cy="22" r="4" fill="#fff"/><circle cx="31" cy="22" r="4" fill="#fff"/><path d="M16 32 Q24 26 32 32" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg><h3>Atenção e memória</h3><p>Padrões e comparações que treinam foco e percepção visual.</p></div>
-      <div class="area-card area-4"><svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#FFB648"/><path d="M24 14 L24 30 M17 23 L24 30 L31 23" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Autonomia e confiança</h3><p>Pequenas tarefas que a criança conclui sozinha, do início ao fim.</p></div>
-      <div class="area-card area-5"><svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#3FAE7C"/><text x="24" y="30" font-family="Baloo 2, sans-serif" font-weight="700" font-size="18" fill="#fff" text-anchor="middle">1·2·3</text></svg><h3>Matemática e conceitos</h3><p>Números, quantidades e formas do dia a dia, sem decoreba.</p></div>
-      <div class="area-card area-6"><svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#1FA39A"/><path d="M15 20 h18 M15 26 h12" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg><h3>Linguagem e vocabulário</h3><p>Associações e histórias que ampliam o vocabulário naturalmente.</p></div>
+      <div class="area-card area-1">
+        <img class="photo" src="img/area-1-coordenacao-motora.png" alt="Atividades de traçado e labirinto para coordenação motora" loading="lazy" width="400" height="300">
+        <svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#2F9BD6"/><path d="M14 30 Q20 16 24 24 T34 18" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg><h3>Coordenação motora e pré-escrita</h3><p>Traçados, recortes e movimentos que preparam a mão para a escrita.</p>
+      </div>
+      <div class="area-card area-2">
+        <img class="photo" src="img/area-2-raciocinio-logico.png" alt="Atividades de padrões e lógica para raciocínio" loading="lazy" width="400" height="300">
+        <svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#8B6BD1"/><rect x="14" y="14" width="9" height="9" fill="#fff"/><rect x="25" y="25" width="9" height="9" fill="#fff"/></svg><h3>Raciocínio lógico</h3><p>Desafios de observar, relacionar e resolver com autonomia.</p>
+      </div>
+      <div class="area-card area-3">
+        <img class="photo" src="img/area-3-atencao-memoria.png" alt="Jogo da memória e atividades de atenção" loading="lazy" width="400" height="300">
+        <svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#FF6B6B"/><circle cx="17" cy="22" r="4" fill="#fff"/><circle cx="31" cy="22" r="4" fill="#fff"/><path d="M16 32 Q24 26 32 32" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg><h3>Atenção e memória</h3><p>Padrões e comparações que treinam foco e percepção visual.</p>
+      </div>
+      <div class="area-card area-4">
+        <img class="photo" src="img/area-4-autonomia-confianca.png" alt="Cartões de rotina e amarrar o cadarço para autonomia" loading="lazy" width="400" height="300">
+        <svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#FFB648"/><path d="M24 14 L24 30 M17 23 L24 30 L31 23" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Autonomia e confiança</h3><p>Pequenas tarefas que a criança conclui sozinha, do início ao fim.</p>
+      </div>
+      <div class="area-card area-5">
+        <img class="photo" src="img/area-5-matematica-conceitos.png" alt="Atividades de contagem e formas para matemática" loading="lazy" width="400" height="300">
+        <svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#3FAE7C"/><text x="24" y="30" font-family="Baloo 2, sans-serif" font-weight="700" font-size="18" fill="#fff" text-anchor="middle">1·2·3</text></svg><h3>Matemática e conceitos</h3><p>Números, quantidades e formas do dia a dia, sem decoreba.</p>
+      </div>
+      <div class="area-card area-6">
+        <img class="photo" src="img/area-6-linguagem-vocabulario.png" alt="Atividades de sequência de história e vocabulário" loading="lazy" width="400" height="300">
+        <svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#1FA39A"/><path d="M15 20 h18 M15 26 h12" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg><h3>Linguagem e vocabulário</h3><p>Associações e histórias que ampliam o vocabulário naturalmente.</p>
+      </div>
     </div>
   </div>
 </section>
