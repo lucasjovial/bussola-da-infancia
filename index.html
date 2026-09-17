@@ -192,6 +192,7 @@
   .price-card .ribbon{ position:absolute; top:-14px; left:26px; background:var(--coral); color:#fff; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:12.5px; padding:6px 14px; border-radius:100px; }
   .price-card h3{ font-size:20px; }
   .price-card .price{ margin-top:14px; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:38px; color:var(--ink); font-variant-numeric:tabular-nums; }
+  .price-card .price-old{ display:block; font-family:'Nunito',sans-serif; font-weight:700; font-size:16px; color:var(--ink-faint); text-decoration:line-through; text-decoration-color:var(--coral); margin-bottom:2px; font-variant-numeric:tabular-nums; }
   .price-card .price small{ font-family:'Nunito',sans-serif; font-weight:700; font-size:14px; color:var(--ink-faint); display:block; margin-top:2px; }
   .price-card ul{ list-style:none; margin:20px 0 0; padding:0; display:flex; flex-direction:column; gap:10px; flex:1; }
   .price-card li{ display:flex; gap:9px; font-size:14.5px; color:var(--ink-soft); }
@@ -205,6 +206,13 @@
   .guarantee .icon{ width:46px; height:46px; flex:none; }
   .guarantee p{ color:#215878; font-size:14.5px; } .guarantee strong{ color:#15425c; }
   .disclaimer{ margin-top:16px; text-align:center; font-size:12.5px; color:var(--ink-faint); max-width:60ch; margin-inline:auto; }
+
+  .acesso-grid{ display:grid; grid-template-columns:1fr; gap:32px; align-items:center; }
+  @media (min-width:768px){ .acesso-grid{ grid-template-columns:1fr 1fr; } }
+  .acesso-grid img{ max-width:380px; width:100%; margin:0 auto; display:block; }
+  .acesso-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
+  .acesso-list li{ display:flex; gap:10px; font-size:16.5px; color:var(--ink); font-weight:700; }
+  .acesso-list li .ck{ color:var(--grass); font-weight:800; flex:none; }
 
   .faq-list{ margin-top:20px; display:flex; flex-direction:column; gap:10px; }
   .faq-item{ background:var(--surface); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
@@ -315,7 +323,7 @@
       <p class="trust">Acesso vitalício, sem mensalidade · sem cadastro pra ver seu plano</p>
     </div>
     <div class="hero-art">
-      <img src="img/capa-produto.png" alt="Amostra das atividades do Mapa TEA e selo de acesso vitalício" width="600" height="600" loading="eager" fetchpriority="high">
+      <img src="img/hero-antes-depois.png" alt="Antes e depois: sem atividades adaptadas x com atividades visuais e estruturadas" width="600" height="600" loading="eager" fetchpriority="high">
     </div>
   </div>
 </section>
@@ -709,7 +717,7 @@
     <div class="price-grid">
       <div class="price-card">
         <h3>Kit Essencial</h3>
-        <div class="price">R$ 47<small>pagamento único</small></div>
+        <div class="price"><span class="price-old">R$ 179,90</span>R$ 47,90<small>pagamento único</small></div>
         <ul>
           <li><span class="ck">✓</span> Quiz personalizado + plano por idade, comunicação e desafio</li>
           <li><span class="ck">✓</span> Mais de 500 atividades, organizadas nas 6 áreas de apoio</li>
@@ -722,7 +730,7 @@
       <div class="price-card featured">
         <span class="ribbon">Mais escolhido</span>
         <h3>Kit Completo</h3>
-        <div class="price">R$ 67<small>pagamento único</small></div>
+        <div class="price"><span class="price-old">R$ 159,90</span>R$ 69,90<small>pagamento único</small></div>
         <ul>
           <li><span class="ck">✓</span> Tudo do Kit Essencial</li>
           <li><span class="ck">✓</span> Atividades novas todo mês, sem custo extra</li>
@@ -757,6 +765,25 @@
       <details class="faq-item"><summary>Posso usar junto com a terapia ocupacional ou fonoaudiologia?</summary><div class="a">Sim, esse é exatamente o objetivo — reforçar em casa, entre uma sessão e outra, o que já é trabalhado com os profissionais.</div></details>
       <details class="faq-item"><summary>Preciso de experiência ou formação pra aplicar?</summary><div class="a">Não. Cada atividade vem com uma instrução curta e direta — pensada pra quem nunca aplicou nada disso antes.</div></details>
       <details class="faq-item"><summary>Posso comercializar ou redistribuir as atividades?</summary><div class="a">O material é de uso pessoal/familiar ou para atendimento individual — não pode ser revendido ou redistribuído.</div></details>
+    </div>
+  </div>
+</section>
+
+<section id="acesso" style="background:var(--surface);">
+  <div class="wrap">
+    <div class="shead">
+      <span class="eyebrow" style="color:var(--grass);">Acesso Vitalício</span>
+      <h2>O que você leva ao garantir seu plano hoje</h2>
+    </div>
+    <div class="acesso-grid">
+      <img src="img/capa-acervo-transparente.png" alt="Acervo completo de atividades do Mapa TEA" loading="lazy" width="380" height="380">
+      <ul class="acesso-list">
+        <li><span class="ck">✓</span> Pagamento único — sem mensalidades</li>
+        <li><span class="ck">✓</span> Acesso imediato após a compra</li>
+        <li><span class="ck">✓</span> Imprima quantas vezes quiser</li>
+        <li><span class="ck">✓</span> Suporte humanizado</li>
+        <li><span class="ck">✓</span> Novas atividades e atualizações</li>
+      </ul>
     </div>
   </div>
 </section>
