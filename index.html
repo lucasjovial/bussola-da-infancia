@@ -222,6 +222,8 @@
   .acesso-grid{ display:grid; grid-template-columns:1fr; gap:32px; align-items:center; }
   @media (min-width:768px){ .acesso-grid{ grid-template-columns:1fr 1fr; } }
   .acesso-grid img{ max-width:380px; width:100%; margin:0 auto; display:block; }
+  .acesso-grid-single{ grid-template-columns:1fr; }
+  .acesso-grid-single img{ max-width:460px; }
   .acesso-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
   .acesso-list li{ display:flex; gap:10px; font-size:16.5px; color:var(--ink); font-weight:700; }
   .acesso-list li .ck{ color:var(--grass); font-weight:800; flex:none; }
@@ -774,15 +776,8 @@
       <span class="eyebrow" style="color:var(--grass);">Acesso Vitalício</span>
       <h2>O que você leva ao garantir seu plano hoje</h2>
     </div>
-    <div class="acesso-grid">
-      <img src="img/capa-acervo-transparente.png" alt="Acervo completo de atividades do Mapa TEA" loading="lazy" width="380" height="380">
-      <ul class="acesso-list">
-        <li><span class="ck">✓</span> Pagamento único — sem mensalidades</li>
-        <li><span class="ck">✓</span> Acesso imediato após a compra</li>
-        <li><span class="ck">✓</span> Imprima quantas vezes quiser</li>
-        <li><span class="ck">✓</span> Suporte humanizado</li>
-        <li><span class="ck">✓</span> Novas atividades e atualizações</li>
-      </ul>
+    <div class="acesso-grid acesso-grid-single">
+      <img src="img/capa-acesso-vitalicio.png" alt="Acesso vitalício: pagamento único sem mensalidades, acesso imediato após a compra, imprima quantas vezes quiser, suporte humanizado, novas atividades e atualizações" loading="lazy" width="500" height="500">
     </div>
   </div>
 </section>
