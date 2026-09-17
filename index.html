@@ -119,7 +119,10 @@
   }
   .blob{ position:absolute; border-radius:42% 58% 63% 37% / 41% 44% 56% 59%; }
 
-  @keyframes heroFloat{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-10px); } }
+  @keyframes heroFloat{
+    0%,100%{ transform:perspective(1000px) translateY(0) rotateX(var(--hero-rx,0deg)) rotateY(var(--hero-ry,0deg)); }
+    50%{ transform:perspective(1000px) translateY(-10px) rotateX(var(--hero-rx,0deg)) rotateY(var(--hero-ry,0deg)); }
+  }
   @keyframes heroIn{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:translateY(0); } }
   .hero-in{ opacity:0; animation:heroIn .5s ease forwards; }
   .hero .eyebrow.hero-in{ animation-delay:.02s; }
@@ -316,13 +319,16 @@
   .stats-bar .stat b{ display:block; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:clamp(24px,4vw,32px); color:var(--coral); font-variant-numeric:tabular-nums; }
   .stats-bar .stat span{ font-size:13px; color:var(--ink-soft); font-weight:700; }
 
-  .mech-card, .area-card, .act-card, .step, .price-card, .testi-slot, .faq-item, .stats-bar .stat, .problem-card{
+  .mech-card, .step, .testi-slot, .faq-item, .stats-bar .stat, .problem-card{
     opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease;
   }
-  .mech-card.is-visible, .area-card.is-visible, .act-card.is-visible, .step.is-visible,
-  .price-card.is-visible, .testi-slot.is-visible, .faq-item.is-visible, .stats-bar .stat.is-visible, .problem-card.is-visible{
+  .mech-card.is-visible, .step.is-visible, .testi-slot.is-visible, .faq-item.is-visible, .stats-bar .stat.is-visible, .problem-card.is-visible{
     opacity:1; transform:translateY(0);
   }
+  /* área/atividade/preço recebem tilt 3D via JS — o reveal deles usa só opacidade
+     pra não disputar a propriedade "transform" com o tilt (ver Camada 2 abaixo) */
+  .area-card, .act-card, .price-card{ opacity:0; transition:opacity .6s ease; }
+  .area-card.is-visible, .act-card.is-visible, .price-card.is-visible{ opacity:1; }
 
   @keyframes ctaPulse{
     0%,100%{ box-shadow:0 0 0 0 rgba(var(--cta-rgb),.45); }
@@ -343,6 +349,124 @@
 
   @media (prefers-reduced-motion: reduce){
     *, *::before, *::after{ animation-duration:.01ms!important; transition-duration:.01ms!important; }
+  }
+
+  /* ============ CAMADA 2 — microinterações de mouse/toque ============ */
+
+  /* Cards com elevação + sombra no hover (mouse real apenas) */
+  .mech-card, .area-card, .act-card, .price-card, .faq-item, .problem-card, .founder-box{
+    transition:transform .32s cubic-bezier(.22,.8,.28,1), box-shadow .32s ease, border-color .28s ease;
+  }
+  @media (hover:hover) and (pointer:fine){
+    .mech-card:hover, .problem-card:hover{ transform:translateY(-7px); box-shadow:0 20px 36px -16px rgba(35,48,67,.3); }
+    .founder-box:hover{ transform:translateY(-5px); box-shadow:0 18px 32px -16px rgba(35,48,67,.22); }
+    .faq-item:hover{ border-color:var(--grape); box-shadow:0 12px 26px -16px rgba(35,48,67,.25); }
+  }
+
+  /* ícones das áreas: variação por card, disparada pelo hover do card-pai */
+  .area-card .icon, .mech-card .num{ transition:transform .38s cubic-bezier(.3,1.5,.5,1); display:inline-block; }
+  @media (hover:hover) and (pointer:fine){
+    .area-1:hover .icon{ transform:translateY(-4px) rotate(-8deg); }
+    .area-2:hover .icon{ transform:scale(1.16); }
+    .area-3:hover .icon{ transform:translateY(-3px) rotate(7deg); }
+    .area-4:hover .icon{ transform:translateY(-5px); }
+    .area-5:hover .icon{ transform:scale(1.12) rotate(-5deg); }
+    .area-6:hover .icon{ transform:translateX(3px) rotate(4deg); }
+    .mech-card:hover .num{ transform:translateY(-3px) scale(1.08); }
+  }
+
+  /* imagens dentro de cards de atividade */
+  .act-card .art img{ transition:transform .5s cubic-bezier(.22,.8,.28,1); }
+  @media (hover:hover) and (pointer:fine){ .act-card:hover .art img{ transform:scale(1.08); } }
+
+  .acesso-grid img, .badge-img{ transition:transform .4s ease; }
+  @media (hover:hover) and (pointer:fine){
+    .acesso-grid:hover img{ transform:scale(1.025) rotate(-1deg); }
+    .guarantee:hover .badge-img{ transform:scale(1.08) rotate(4deg); }
+  }
+
+  /* Tilt 3D — transform inteiro controlado por custom properties setadas via JS */
+  .tilt-card{
+    transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0px)) scale(var(--tscale,1));
+    transition:transform .5s cubic-bezier(.22,.8,.28,1), box-shadow .32s ease, border-color .28s ease;
+  }
+  .tilt-card.tilt-active{ transition:transform .09s linear, box-shadow .32s ease, border-color .28s ease; }
+  @media (hover:hover) and (pointer:fine){
+    .area-card.tilt-card:hover, .price-card.tilt-card:hover{ box-shadow:0 22px 40px -16px rgba(35,48,67,.3); }
+    .act-card.tilt-card:hover{ box-shadow:0 20px 38px -14px rgba(35,48,67,.32); border-color:var(--coral); }
+  }
+
+  /* brilho radial que segue o cursor — --mx/--my setados via JS em % */
+  .glow-card{ position:relative; }
+  .glow-card::after{
+    content:''; position:absolute; inset:0; opacity:0; pointer-events:none; border-radius:inherit;
+    background:radial-gradient(220px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.5), transparent 70%);
+    transition:opacity .35s ease; z-index:0;
+  }
+  .glow-card > *{ position:relative; z-index:1; }
+  @media (hover:hover) and (pointer:fine){ .glow-card:hover::after{ opacity:1; } }
+
+  /* botão magnético — combina puxão sutil com o lift já existente */
+  .magnetic{ transform:translate(var(--mtx,0px), calc(var(--mty,0px) - 2px)); transition:transform .28s cubic-bezier(.22,.8,.28,1); }
+  .magnetic:active{ transform:translate(var(--mtx,0px), var(--mty,0px)) scale(.97); }
+
+  /* ripple de clique nos botões */
+  .btn{ position:relative; overflow:hidden; }
+  .ripple{
+    position:absolute; border-radius:50%; pointer-events:none;
+    background:rgba(255,255,255,.55); transform:scale(0); animation:rippleAnim .55s ease-out forwards;
+  }
+  .btn-ghost .ripple{ background:rgba(35,48,67,.14); }
+  @keyframes rippleAnim{ to{ transform:scale(2.6); opacity:0; } }
+
+  /* brilho único que atravessa a imagem no hover */
+  .shine-wrap{ position:relative; overflow:hidden; }
+  .shine-wrap::before{
+    content:''; position:absolute; top:0; left:-60%; width:35%; height:100%; z-index:2;
+    background:linear-gradient(115deg, transparent, rgba(255,255,255,.5), transparent);
+    transform:skewX(-20deg); pointer-events:none; opacity:0;
+  }
+  @media (hover:hover) and (pointer:fine){ .shine-wrap:hover::before{ animation:shineSweep .9s ease; } }
+  @keyframes shineSweep{ 0%{ left:-60%; opacity:.9; } 100%{ left:120%; opacity:0; } }
+
+  /* quiz: hover mais evidente + pop de seleção */
+  @media (hover:hover) and (pointer:fine){
+    .quiz-opt:hover{ transform:translateY(-3px); box-shadow:0 12px 24px -14px rgba(35,48,67,.28); }
+  }
+  .quiz-opt-age img{ transition:transform .25s ease; }
+  @keyframes selectPop{ 0%{ transform:scale(1); } 45%{ transform:scale(1.035); } 100%{ transform:scale(1.01); } }
+  .quiz-opt.selected{ animation:selectPop .32s ease; }
+
+  /* seções com parallax leve de cursor (blobs existentes ganham deslocamento) */
+  #mecanismo::before{ transition:transform .5s cubic-bezier(.22,.8,.28,1); transform:translate(calc(var(--mx,0) * 16px), calc(var(--my,0) * 16px)); }
+  #atividades::before{ transition:transform .5s cubic-bezier(.22,.8,.28,1); transform:translate(calc(var(--mx,0) * -16px), calc(var(--my,0) * -16px)); }
+  #depoimentos::before{ transition:transform .5s cubic-bezier(.22,.8,.28,1); transform:translate(calc(var(--mx,0) * 14px), calc(var(--my,0) * -14px)); }
+
+  #areas{ position:relative; overflow:hidden; }
+  #areas::before{
+    content:''; position:absolute; width:220px; height:220px; border-radius:50%; background:var(--grape);
+    opacity:.09; top:-70px; left:-60px; pointer-events:none;
+    transition:transform .5s cubic-bezier(.22,.8,.28,1); transform:translate(calc(var(--mx,0) * 14px), calc(var(--my,0) * 14px));
+  }
+  #areas .wrap{ position:relative; z-index:1; }
+
+  #cta-final{ background-color:var(--coral); background-image:radial-gradient(560px circle at var(--mx-pct,50%) var(--my-pct,50%), rgba(255,255,255,.18), transparent 62%); }
+
+  /* hero: mockup reage à posição do mouse na seção */
+  .hero{ --hero-rx:0deg; --hero-ry:0deg; }
+  .hero-glow{
+    position:absolute; width:420px; height:420px; border-radius:50%; pointer-events:none; z-index:-1;
+    background:radial-gradient(circle, rgba(147,51,234,.16), transparent 70%);
+    right:-60px; top:10%;
+  }
+  .hero-grid{ position:relative; z-index:1; }
+
+  @media (prefers-reduced-motion: reduce), (hover:none){
+    .tilt-card{ transform:none!important; }
+    .magnetic{ transform:none!important; }
+    .glow-card::after{ display:none!important; }
+    .shine-wrap::before{ display:none!important; }
+    .hero-art img{ animation:none!important; }
   }
 </style>
 </head>
@@ -395,6 +519,7 @@
       <p class="trust hero-in">Acesso vitalício, sem mensalidade · sem cadastro pra ver seu plano</p>
     </div>
     <div class="hero-art hero-in">
+      <div class="hero-glow" aria-hidden="true"></div>
       <img src="img/hero-antes-depois.webp" alt="Antes e depois: sem atividades adaptadas x com atividades visuais e estruturadas" width="600" height="600" loading="eager" fetchpriority="high">
     </div>
   </div>
@@ -857,7 +982,7 @@
   </div>
 </section>
 
-<section id="cta-final" style="background:var(--coral); position:relative; overflow:hidden;">
+<section id="cta-final" style="position:relative; overflow:hidden;">
   <div class="wrap" style="text-align:center; position:relative; z-index:1;">
     <h2 style="color:#fff; font-size:clamp(26px,4vw,36px);">Seu filho não precisa de mais uma lista genérica. Precisa do plano certo pra fase de agora.</h2>
     <p style="color:#ffe8e6; margin-top:14px; font-size:16.5px; max-width:56ch; margin-inline:auto;">Perguntas sobre o momento real de vocês, garantia de 7 dias, e você já sai daqui com um caminho — não mais uma pesquisa em aberto.</p>
@@ -1149,6 +1274,7 @@
     var summary = details.querySelector('summary');
     var content = details.querySelector('.a');
     if (!summary || !content) return;
+    summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
     summary.addEventListener('click', function(e){
       if (details.open) {
         e.preventDefault();
@@ -1160,6 +1286,7 @@
         });
         content.addEventListener('transitionend', function onClose(){
           details.open = false;
+          summary.setAttribute('aria-expanded', 'false');
           content.style.transition = '';
           content.style.height = '';
           content.removeEventListener('transitionend', onClose);
@@ -1171,6 +1298,7 @@
           content.style.transition = 'height .28s ease';
           content.style.height = target + 'px';
         });
+        summary.setAttribute('aria-expanded', 'true');
         content.addEventListener('transitionend', function onOpen(){
           content.style.transition = '';
           content.style.height = '';
@@ -1179,6 +1307,174 @@
       }
     });
   });
+})();
+</script>
+
+<script>
+(function(){
+  // ---------- capacidades ----------
+  var canHover = window.matchMedia && matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var enableFancy = canHover && !reduceMotion;
+
+  function rafThrottle(fn){
+    var ticking = false, lastArgs;
+    return function(){
+      lastArgs = arguments;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function(){ fn.apply(null, lastArgs); ticking = false; });
+    };
+  }
+
+  // ---------- ripple de clique em todos os botões (funciona em touch também) ----------
+  document.addEventListener('pointerdown', function(e){
+    var btn = e.target.closest ? e.target.closest('.btn') : null;
+    if (!btn) return;
+    var rect = btn.getBoundingClientRect();
+    var size = Math.max(rect.width, rect.height) * 1.4;
+    var span = document.createElement('span');
+    span.className = 'ripple';
+    span.style.width = span.style.height = size + 'px';
+    span.style.left = (e.clientX - rect.left - size / 2) + 'px';
+    span.style.top = (e.clientY - rect.top - size / 2) + 'px';
+    btn.appendChild(span);
+    span.addEventListener('animationend', function(){ span.remove(); });
+  });
+
+  if (!enableFancy) return; // celular / prefers-reduced-motion: só o essencial acima
+
+  // ---------- tilt 3D + brilho radial nos cards principais ----------
+  var TILT_MAX = 5; // graus
+  function setupTilt(el, opts){
+    opts = opts || {};
+    el.classList.add('tilt-card');
+    if (opts.glow) el.classList.add('glow-card');
+    var onMove = rafThrottle(function(clientX, clientY){
+      var r = el.getBoundingClientRect();
+      var px = (clientX - r.left) / r.width;   // 0..1
+      var py = (clientY - r.top) / r.height;   // 0..1
+      var ry = (px - 0.5) * (TILT_MAX * 2);
+      var rx = (0.5 - py) * (TILT_MAX * 2);
+      el.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+      el.style.setProperty('--rx', rx.toFixed(2) + 'deg');
+      if (opts.glow){
+        el.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
+        el.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+      }
+    });
+    el.addEventListener('pointerenter', function(e){
+      if (e.pointerType !== 'mouse') return;
+      el.classList.add('tilt-active');
+      el.style.setProperty('--ty', (opts.lift || -8) + 'px');
+      el.style.setProperty('--tscale', opts.scale || 1.02);
+    });
+    el.addEventListener('pointermove', function(e){
+      if (e.pointerType !== 'mouse') return;
+      onMove(e.clientX, e.clientY);
+    });
+    el.addEventListener('pointerleave', function(e){
+      if (e.pointerType !== 'mouse') return;
+      el.classList.remove('tilt-active');
+      el.style.setProperty('--rx', '0deg');
+      el.style.setProperty('--ry', '0deg');
+      el.style.setProperty('--ty', '0px');
+      el.style.setProperty('--tscale', 1);
+      if (opts.glow){ el.style.setProperty('--mx', '50%'); el.style.setProperty('--my', '50%'); }
+    });
+  }
+
+  document.querySelectorAll('.area-card').forEach(function(el){ setupTilt(el, { glow:true, lift:-8, scale:1.02 }); });
+  document.querySelectorAll('.price-card').forEach(function(el){ setupTilt(el, { glow:true, lift:-6, scale:1.01 }); });
+  document.querySelectorAll('.act-card').forEach(function(el){ setupTilt(el, { glow:false, lift:-8, scale:1.02 }); });
+
+  // ---------- botões magnéticos nos CTAs principais ----------
+  function setupMagnetic(el){
+    if (!el) return;
+    el.classList.add('magnetic');
+    var onMove = rafThrottle(function(clientX, clientY){
+      var r = el.getBoundingClientRect();
+      var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      var dx = (clientX - cx) * 0.28;
+      var dy = (clientY - cy) * 0.28;
+      var max = 8;
+      dx = Math.max(-max, Math.min(max, dx));
+      dy = Math.max(-max, Math.min(max, dy));
+      el.style.setProperty('--mtx', dx.toFixed(1) + 'px');
+      el.style.setProperty('--mty', dy.toFixed(1) + 'px');
+    });
+    el.addEventListener('pointermove', function(e){
+      if (e.pointerType !== 'mouse') return;
+      onMove(e.clientX, e.clientY);
+    });
+    el.addEventListener('pointerleave', function(){
+      el.style.setProperty('--mtx', '0px');
+      el.style.setProperty('--mty', '0px');
+    });
+  }
+  document.querySelectorAll('.hero .btn-primary, .problema-bridge .btn, #cta-final .btn').forEach(setupMagnetic);
+
+  // ---------- brilho único ao passar o mouse (hero e capa de acesso vitalício) ----------
+  document.querySelectorAll('.hero-art, .acesso-grid-single').forEach(function(el){ el.classList.add('shine-wrap'); });
+
+  // ---------- hero: mockup inclina levemente com a posição do mouse na seção ----------
+  var heroSection = document.querySelector('.hero');
+  if (heroSection) {
+    var onHeroMove = rafThrottle(function(clientX, clientY){
+      var r = heroSection.getBoundingClientRect();
+      var px = (clientX - r.left) / r.width - 0.5;   // -0.5..0.5
+      var py = (clientY - r.top) / r.height - 0.5;
+      heroSection.style.setProperty('--hero-ry', (px * 8).toFixed(2) + 'deg');
+      heroSection.style.setProperty('--hero-rx', (-py * 6).toFixed(2) + 'deg');
+    });
+    heroSection.addEventListener('pointermove', function(e){
+      if (e.pointerType !== 'mouse') return;
+      onHeroMove(e.clientX, e.clientY);
+    });
+    heroSection.addEventListener('pointerleave', function(){
+      heroSection.style.setProperty('--hero-ry', '0deg');
+      heroSection.style.setProperty('--hero-rx', '0deg');
+    });
+  }
+
+  // ---------- parallax discreto nos blobs decorativos das seções principais ----------
+  document.querySelectorAll('#mecanismo, #atividades, #depoimentos, #areas').forEach(function(section){
+    var onSectionMove = rafThrottle(function(clientX, clientY){
+      var r = section.getBoundingClientRect();
+      var mx = (clientX - r.left) / r.width - 0.5;
+      var my = (clientY - r.top) / r.height - 0.5;
+      section.style.setProperty('--mx', mx.toFixed(3));
+      section.style.setProperty('--my', my.toFixed(3));
+    });
+    section.addEventListener('pointermove', function(e){
+      if (e.pointerType !== 'mouse') return;
+      onSectionMove(e.clientX, e.clientY);
+    });
+    section.addEventListener('pointerleave', function(){
+      section.style.setProperty('--mx', '0');
+      section.style.setProperty('--my', '0');
+    });
+  });
+
+  // ---------- CTA final: gradiente radial acompanha o cursor ----------
+  var ctaFinal = document.getElementById('cta-final');
+  if (ctaFinal) {
+    var onCtaMove = rafThrottle(function(clientX, clientY){
+      var r = ctaFinal.getBoundingClientRect();
+      var px = ((clientX - r.left) / r.width) * 100;
+      var py = ((clientY - r.top) / r.height) * 100;
+      ctaFinal.style.setProperty('--mx-pct', px.toFixed(1) + '%');
+      ctaFinal.style.setProperty('--my-pct', py.toFixed(1) + '%');
+    });
+    ctaFinal.addEventListener('pointermove', function(e){
+      if (e.pointerType !== 'mouse') return;
+      onCtaMove(e.clientX, e.clientY);
+    });
+    ctaFinal.addEventListener('pointerleave', function(){
+      ctaFinal.style.setProperty('--mx-pct', '50%');
+      ctaFinal.style.setProperty('--my-pct', '50%');
+    });
+  }
 })();
 </script>
 
