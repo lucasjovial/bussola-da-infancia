@@ -116,6 +116,8 @@
     color:var(--ink); cursor:pointer; transition:.15s;
   }
   .quiz-opt:hover{ border-color:var(--sky); background:var(--sky-soft); }
+  .quiz-opt-age{ display:flex; align-items:center; gap:14px; }
+  .quiz-opt-age img{ width:52px; height:52px; border-radius:50%; object-fit:cover; flex:none; border:2px solid var(--border); }
   .quiz-result{ text-align:center; }
   .quiz-result .badge{ display:inline-block; padding:6px 14px; border-radius:100px; background:var(--grape-soft); color:var(--grape); font-weight:700; font-size:13px; margin-bottom:14px; }
   .quiz-result h3{ font-size:25px; }
@@ -357,10 +359,22 @@
         <div class="quiz-step active" data-step="1">
           <h3>Qual a idade do seu filho(a)?</h3>
           <div class="quiz-options">
-            <button class="quiz-opt" data-idade="2-4 anos" data-branch="A">2 a 4 anos</button>
-            <button class="quiz-opt" data-idade="5-7 anos" data-branch="B">5 a 7 anos</button>
-            <button class="quiz-opt" data-idade="8-10 anos" data-branch="C">8 a 10 anos</button>
-            <button class="quiz-opt" data-idade="11 anos ou mais" data-branch="D">11 anos ou mais</button>
+            <button class="quiz-opt quiz-opt-age" data-idade="2-4 anos" data-branch="A">
+              <img src="img/avatar-quiz-1.png" alt="" loading="lazy" width="52" height="52">
+              <span>2 a 4 anos</span>
+            </button>
+            <button class="quiz-opt quiz-opt-age" data-idade="5-7 anos" data-branch="B">
+              <img src="img/avatar-quiz-2.png" alt="" loading="lazy" width="52" height="52">
+              <span>5 a 7 anos</span>
+            </button>
+            <button class="quiz-opt quiz-opt-age" data-idade="8-10 anos" data-branch="C">
+              <img src="img/avatar-quiz-3.png" alt="" loading="lazy" width="52" height="52">
+              <span>8 a 10 anos</span>
+            </button>
+            <button class="quiz-opt quiz-opt-age" data-idade="11 anos ou mais" data-branch="D">
+              <img src="img/avatar-quiz-4.png" alt="" loading="lazy" width="52" height="52">
+              <span>11 anos ou mais</span>
+            </button>
           </div>
         </div>
 
