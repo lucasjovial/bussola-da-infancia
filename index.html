@@ -18,6 +18,8 @@
 <!-- SUBSTITUA: URL da imagem de compartilhamento (og:image), 1200x630 -->
 <meta property="og:image" content="https://bussola-da-infancia.vercel.app/og-image.png">
 <meta name="theme-color" content="#fdfaf2">
+<link rel="canonical" href="https://bussola-da-infancia.vercel.app/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='19' fill='%23FF6B6B'/%3E%3Ccircle cx='20' cy='20' r='7' fill='%23fff'/%3E%3Cpath d='M20 6 L22 17 L20 20 L18 17 Z' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -46,6 +48,10 @@
     --radius: 20px;
   }
   *{ box-sizing:border-box; }
+  .visually-hidden{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden;
+    clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
   html{ scroll-behavior:smooth; }
   body{
     margin:0; background:var(--bg); color:var(--ink);
@@ -66,14 +72,24 @@
     display:inline-flex; align-items:center; justify-content:center; gap:8px;
     font-family:'Baloo 2',sans-serif; font-weight:700; font-size:17px;
     padding:15px 30px; border-radius:100px; border:none; cursor:pointer;
-    text-decoration:none; transition:transform .15s ease, box-shadow .15s ease;
+    text-decoration:none; transition:transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+    min-height:44px;
   }
   .btn:hover{ transform:translateY(-2px); }
+  .btn:active{ transform:translateY(0) scale(.98); }
+  .btn:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
   .btn-primary{ background:var(--coral); color:#fff; box-shadow:0 10px 22px -8px rgba(255,107,107,.55); }
   .btn-primary:hover{ box-shadow:0 14px 26px -8px rgba(255,107,107,.6); }
   .btn-ghost{ background:var(--surface); color:var(--ink); border:2px solid var(--border); }
+  .btn-ghost:hover{ border-color:var(--coral); }
   .btn-lg{ padding:18px 38px; font-size:19px; }
   .btn[disabled]{ opacity:.5; cursor:not-allowed; transform:none; }
+  .btn-pulse-once{ animation:ctaPulse 1.6s ease-out 1; }
+
+  .scroll-progress{
+    position:fixed; top:0; left:0; height:3px; width:0%; background:var(--coral); z-index:60; pointer-events:none;
+  }
+  @media (prefers-reduced-motion: reduce){ .scroll-progress{ transition:none; } }
 
   header.site{
     position:sticky; top:0; z-index:20; background:color-mix(in srgb, var(--bg) 92%, transparent);
@@ -86,7 +102,7 @@
   nav.links a:hover{ color:var(--coral); }
   @media (max-width:720px){ nav.links{ display:none; } }
 
-  .hero{ padding-block:52px 20px; position:relative; overflow:hidden; }
+  .hero{ padding-block:52px 36px; position:relative; overflow:hidden; }
   .hero-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center; }
   @media (max-width:840px){ .hero-grid{ grid-template-columns:1fr; } }
   .hero .eyebrow{ color:var(--grape); }
@@ -96,8 +112,33 @@
   .hero .cta-row{ margin-top:26px; display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
   .hero .trust{ margin-top:16px; font-size:13.5px; color:var(--ink-faint); font-weight:700; }
   .hero-art{ position:relative; aspect-ratio:1/1; }
-  .hero-art img{ width:100%; height:100%; object-fit:contain; display:block; }
+  .hero-art img{
+    width:100%; height:100%; object-fit:contain; display:block;
+    filter:drop-shadow(0 18px 30px rgba(35,48,67,.18));
+    animation:heroFloat 5.5s ease-in-out infinite;
+  }
   .blob{ position:absolute; border-radius:42% 58% 63% 37% / 41% 44% 56% 59%; }
+
+  @keyframes heroFloat{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-10px); } }
+  @keyframes heroIn{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:translateY(0); } }
+  .hero-in{ opacity:0; animation:heroIn .5s ease forwards; }
+  .hero .eyebrow.hero-in{ animation-delay:.02s; }
+  .hero h1.hero-in{ animation-delay:.08s; }
+  .hero p.lead.hero-in{ animation-delay:.16s; }
+  .hero .cta-row.hero-in{ animation-delay:.24s; }
+  .hero .trust.hero-in{ animation-delay:.32s; }
+  .hero-art.hero-in{ animation-delay:.1s; }
+
+  .scroll-cue{
+    position:absolute; left:50%; bottom:10px; transform:translateX(-50%);
+    width:22px; height:34px; border:2px solid var(--ink-faint); border-radius:100px; opacity:.5;
+  }
+  .scroll-cue::before{
+    content:''; position:absolute; top:6px; left:50%; width:4px; height:8px; margin-left:-2px;
+    background:var(--ink-faint); border-radius:100px; animation:scrollCue 1.8s ease infinite;
+  }
+  @keyframes scrollCue{ 0%{ opacity:1; transform:translateY(0); } 70%,100%{ opacity:0; transform:translateY(10px); } }
+  @media (max-width:600px){ .scroll-cue{ display:none; } }
 
   .quiz-section{ background:var(--surface-2); border-radius:32px; margin-inline:auto; }
   .quiz-card{
@@ -108,15 +149,34 @@
   .quiz-progress span{ height:6px; flex:1; border-radius:100px; background:var(--border); }
   .quiz-progress span.done{ background:var(--coral); }
   .quiz-step{ display:none; }
-  .quiz-step.active{ display:block; }
+  .quiz-step.active{
+    display:block; opacity:1; transform:translateX(0);
+    transition:opacity .3s ease, transform .3s ease;
+  }
+  .quiz-step.active.entering{ opacity:0; transform:translateX(10px); }
   .quiz-step h3{ font-size:23px; }
   .quiz-options{ margin-top:20px; display:flex; flex-direction:column; gap:10px; }
   .quiz-opt{
+    position:relative;
     text-align:left; padding:15px 18px; border-radius:14px; border:2px solid var(--border);
     background:var(--surface); font-family:'Nunito',sans-serif; font-weight:700; font-size:15.5px;
-    color:var(--ink); cursor:pointer; transition:.15s;
+    color:var(--ink); cursor:pointer; transition:border-color .15s ease, background-color .15s ease, transform .15s ease, box-shadow .15s ease;
+    min-height:44px;
   }
   .quiz-opt:hover{ border-color:var(--sky); background:var(--sky-soft); }
+  .quiz-opt:active{ transform:scale(.99); }
+  .quiz-opt:focus-visible{ outline:2px solid var(--sky); outline-offset:2px; }
+  .quiz-opt[disabled]{ cursor:default; }
+  .quiz-opt.selected{
+    border-color:var(--coral); background:var(--coral-soft);
+    box-shadow:0 4px 14px -6px rgba(255,107,107,.5);
+  }
+  .quiz-opt.selected::after{
+    content:'✓'; position:absolute; right:14px; top:50%; transform:translateY(-50%);
+    width:22px; height:22px; border-radius:50%; background:var(--coral); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;
+  }
+  .quiz-opt-age.selected::after{ right:14px; }
   .quiz-opt-age{ display:flex; align-items:center; gap:14px; }
   .quiz-opt-age img{ width:52px; height:52px; border-radius:50%; object-fit:cover; flex:none; border:2px solid var(--border); }
   .quiz-result{ text-align:center; }
@@ -234,7 +294,8 @@
   .faq-item summary::-webkit-details-marker{ display:none; }
   .faq-item summary::after{ content:'+'; font-size:22px; color:var(--coral); }
   .faq-item[open] summary::after{ content:'−'; }
-  .faq-item .a{ padding:0 20px 18px; color:var(--ink-soft); font-size:14.5px; }
+  .faq-item .a{ padding:0 20px 18px; color:var(--ink-soft); font-size:14.5px; overflow:hidden; }
+  .faq-item summary:focus-visible{ outline:2px solid var(--grape); outline-offset:-2px; }
 
   footer{ background:var(--ink); color:#c9cfdc; padding-block:34px; margin-top:20px; }
   footer .wrap{ display:flex; flex-wrap:wrap; gap:14px; justify-content:space-between; align-items:center; }
@@ -267,7 +328,6 @@
     0%,100%{ box-shadow:0 0 0 0 rgba(var(--cta-rgb),.45); }
     50%{ box-shadow:0 0 0 12px rgba(var(--cta-rgb),0); }
   }
-  .btn-primary{ animation:ctaPulse 2.5s infinite; }
   .btn-primary:hover{ animation:none; }
 
   .cta-sticky{
@@ -287,6 +347,7 @@
 </style>
 </head>
 <body>
+<div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="Progresso de leitura da página" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
 <!--
   Verificação de domínio — atualize a lista abaixo se comprar um domínio próprio.
   Em localhost o bloqueio não dispara, isso é esperado.
@@ -328,19 +389,20 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">Rotina visual e atividades adaptadas · TEA</span>
-      <h1>Menos crise, mais rotina previsível pro seu filho no espectro.</h1>
-      <p class="lead">Nada de rolar a internet tentando adivinhar o que serve. Conte pra gente o momento que vocês estão vivendo e o Mapa monta o caminho certo — pela idade, pelo nível de comunicação e pelo desafio real do seu filho agora.</p>
-      <div class="cta-row">
-        <a href="#quiz" class="btn btn-primary btn-lg">Descobrir o plano do meu filho</a>
+      <span class="eyebrow hero-in">Rotina visual e atividades adaptadas · TEA</span>
+      <h1 class="hero-in">Menos crise, mais rotina previsível pro seu filho no espectro.</h1>
+      <p class="lead hero-in">Nada de rolar a internet tentando adivinhar o que serve. Conte pra gente o momento que vocês estão vivendo e o Mapa monta o caminho certo — pela idade, pelo nível de comunicação e pelo desafio real do seu filho agora.</p>
+      <div class="cta-row hero-in">
+        <a href="#quiz" class="btn btn-primary btn-lg btn-pulse-once">Descobrir o plano do meu filho</a>
         <a href="#atividades" class="btn btn-ghost">Ver atividades primeiro</a>
       </div>
-      <p class="trust">Acesso vitalício, sem mensalidade · sem cadastro pra ver seu plano</p>
+      <p class="trust hero-in">Acesso vitalício, sem mensalidade · sem cadastro pra ver seu plano</p>
     </div>
-    <div class="hero-art">
+    <div class="hero-art hero-in">
       <img src="img/hero-antes-depois.png" alt="Antes e depois: sem atividades adaptadas x com atividades visuais e estruturadas" width="600" height="600" loading="eager" fetchpriority="high">
     </div>
   </div>
+  <div class="scroll-cue" aria-hidden="true"></div>
 </section>
 
 <div class="wrap">
@@ -376,9 +438,10 @@
       <div class="quiz-card">
         <img class="quiz-avatar" id="quizAvatar" src="" alt="" hidden width="64" height="64">
         <p class="quiz-intro">Não existe resposta certa ou errada — só queremos entender o momento real de vocês.</p>
-        <div class="quiz-progress">
+        <div class="quiz-progress" role="progressbar" aria-label="Progresso do quiz" aria-valuemin="0" aria-valuemax="6" aria-valuenow="1">
           <span class="done" data-p="1"></span><span data-p="2"></span><span data-p="3"></span><span data-p="4"></span><span data-p="5"></span><span data-p="6"></span>
         </div>
+        <p class="visually-hidden" id="quizLive" aria-live="polite"></p>
 
         <div class="quiz-step active" data-step="1">
           <h3>Qual a idade do seu filho(a)?</h3>
@@ -878,12 +941,42 @@
     }
   };
 
+  var quizLive = document.getElementById('quizLive');
+  var STEP_LABEL = {
+    '1':'Pergunta 1 de 6: idade', '2':'Pergunta 2 de 6: maior desafio', 'praise1':'Confirmação',
+    '3':'Pergunta 3 de 6: comunicação', '4':'Pergunta 4 de 6: o que acalma', 'praise2':'Confirmação',
+    '5':'Pergunta 5 de 6: tempo disponível', '6':'Pergunta 6 de 6: meta', 'result':'Seu plano está pronto'
+  };
+
   function showStep(name){
-    steps.forEach(function(s){ s.classList.toggle('active', s.dataset.step === name); });
+    // reinicia qualquer seleção/estado de botão desabilitado antes de trocar de tela
+    document.querySelectorAll('.quiz-opt.selected').forEach(function(b){
+      b.classList.remove('selected');
+      b.disabled = false;
+    });
+    steps.forEach(function(s){
+      var isTarget = s.dataset.step === name;
+      s.classList.toggle('active', isTarget);
+      if (isTarget) {
+        s.classList.add('entering');
+        // duplo rAF garante que o navegador registrou o estado "entering" antes de remover
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){ s.classList.remove('entering'); });
+        });
+      } else {
+        s.classList.remove('entering');
+      }
+    });
+    if (quizLive) {
+      var base = name.replace(/[ABCD]$/, '');
+      quizLive.textContent = STEP_LABEL[base] || '';
+    }
   }
 
   function setProgress(n){
     progress.forEach(function(p){ p.classList.toggle('done', parseInt(p.dataset.p,10) <= n); });
+    var bar = document.querySelector('.quiz-progress');
+    if (bar) bar.setAttribute('aria-valuenow', String(n));
   }
 
   function stepIdFor(n){
@@ -891,21 +984,34 @@
     return String(n) + answers.branch;
   }
 
+  // Marca a opção clicada como selecionada, trava as outras do mesmo grupo
+  // por uma fração de segundo (pra pessoa perceber a escolha) e só então avança.
+  function selectThenRun(selector, run){
+    document.querySelectorAll(selector).forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if (btn.disabled) return;
+        var group = btn.closest('.quiz-options');
+        var siblings = group ? group.querySelectorAll('.quiz-opt') : [btn];
+        siblings.forEach(function(b){ b.disabled = true; });
+        btn.classList.add('selected');
+        setTimeout(function(){ run(btn); }, 260);
+      });
+    });
+  }
+
   var AVATAR_BY_BRANCH = { A: 'img/avatar-quiz-1.png', B: 'img/avatar-quiz-2.png', C: 'img/avatar-quiz-3.png', D: 'img/avatar-quiz-4.png' };
   var quizAvatar = document.getElementById('quizAvatar');
 
-  document.querySelectorAll('[data-idade]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      answers.idade = btn.dataset.idade;
-      answers.branch = btn.dataset.branch;
-      if (quizAvatar && AVATAR_BY_BRANCH[answers.branch]) {
-        quizAvatar.src = AVATAR_BY_BRANCH[answers.branch];
-        quizAvatar.alt = 'Criança de ' + answers.idade;
-        quizAvatar.hidden = false;
-      }
-      setProgress(1);
-      showStep('2' + answers.branch);
-    });
+  selectThenRun('[data-idade]', function(btn){
+    answers.idade = btn.dataset.idade;
+    answers.branch = btn.dataset.branch;
+    if (quizAvatar && AVATAR_BY_BRANCH[answers.branch]) {
+      quizAvatar.src = AVATAR_BY_BRANCH[answers.branch];
+      quizAvatar.alt = 'Criança de ' + answers.idade;
+      quizAvatar.hidden = false;
+    }
+    setProgress(1);
+    showStep('2' + answers.branch);
   });
 
   var VALIDATION_BY_DESAFIO = {
@@ -915,65 +1021,55 @@
     social: "Ver ele(a) sem se aproximar de outras crianças mexe com qualquer mãe ou pai."
   };
 
-  document.querySelectorAll('[data-desafio]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      answers.desafio = btn.dataset.desafio;
-      setProgress(2);
-      document.getElementById('praise1-title').textContent = '2 de 6 respondidas — já sabemos o que pega nessa fase de ' + answers.idade;
-      var praiseText = document.getElementById('praise1-text');
-      if (praiseText) {
-        var validation = VALIDATION_BY_DESAFIO[answers.desafio] || '';
-        praiseText.textContent = (validation ? validation + ' ' : '') + 'As próximas perguntas ajudam a montar o plano certo pra isso.';
-      }
-      showStep('praise1');
-    });
+  selectThenRun('[data-desafio]', function(btn){
+    answers.desafio = btn.dataset.desafio;
+    setProgress(2);
+    document.getElementById('praise1-title').textContent = '2 de 6 respondidas — já sabemos o que pega nessa fase de ' + answers.idade;
+    var praiseText = document.getElementById('praise1-text');
+    if (praiseText) {
+      var validation = VALIDATION_BY_DESAFIO[answers.desafio] || '';
+      praiseText.textContent = (validation ? validation + ' ' : '') + 'As próximas perguntas ajudam a montar o plano certo pra isso.';
+    }
+    showStep('praise1');
   });
 
   document.getElementById('praise1-continue').addEventListener('click', function(){
     showStep('3' + answers.branch);
   });
 
-  document.querySelectorAll('[data-comunicacao]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      answers.comunicacao = btn.dataset.comunicacao;
-      setProgress(3);
-      showStep('4' + answers.branch);
-    });
+  selectThenRun('[data-comunicacao]', function(btn){
+    answers.comunicacao = btn.dataset.comunicacao;
+    setProgress(3);
+    showStep('4' + answers.branch);
   });
 
-  document.querySelectorAll('[data-interesse]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      answers.interesse = btn.dataset.interesse;
-      setProgress(4);
-      showStep('praise2');
-    });
+  selectThenRun('[data-interesse]', function(btn){
+    answers.interesse = btn.dataset.interesse;
+    setProgress(4);
+    showStep('praise2');
   });
 
   document.getElementById('praise2-continue').addEventListener('click', function(){
     showStep('5');
   });
 
-  document.querySelectorAll('[data-tempo]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      answers.tempo = btn.dataset.tempo;
-      setProgress(5);
-      showStep('6' + answers.branch);
-    });
+  selectThenRun('[data-tempo]', function(btn){
+    answers.tempo = btn.dataset.tempo;
+    setProgress(5);
+    showStep('6' + answers.branch);
   });
 
-  document.querySelectorAll('[data-meta]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      answers.meta = btn.dataset.meta;
-      setProgress(6);
-      var branchChallenges = CHALLENGE_COPY[answers.branch] || {};
-      var c = branchChallenges[answers.desafio] || { title: 'Seu plano está pronto', text: 'Baseado nas suas respostas, montamos um caminho de atividades pra essa fase.' };
-      var branchGoals = GOAL_COPY[answers.branch] || {};
-      document.getElementById('res-idade-badge').textContent = 'Plano para ' + answers.idade;
-      document.getElementById('res-title').textContent = c.title;
-      document.getElementById('res-text').textContent = c.text;
-      document.getElementById('res-text2').textContent = branchGoals[answers.meta] || '';
-      showStep('result');
-    });
+  selectThenRun('[data-meta]', function(btn){
+    answers.meta = btn.dataset.meta;
+    setProgress(6);
+    var branchChallenges = CHALLENGE_COPY[answers.branch] || {};
+    var c = branchChallenges[answers.desafio] || { title: 'Seu plano está pronto', text: 'Baseado nas suas respostas, montamos um caminho de atividades pra essa fase.' };
+    var branchGoals = GOAL_COPY[answers.branch] || {};
+    document.getElementById('res-idade-badge').textContent = 'Plano para ' + answers.idade;
+    document.getElementById('res-title').textContent = c.title;
+    document.getElementById('res-text').textContent = c.text;
+    document.getElementById('res-text2').textContent = branchGoals[answers.meta] || '';
+    showStep('result');
   });
 
   document.querySelectorAll('[data-back]').forEach(function(btn){
@@ -1017,6 +1113,61 @@
     }, { threshold: 0 });
     stickyObserver.observe(hero);
   }
+
+  // Barra fina de progresso de leitura no topo da página
+  var scrollBar = document.getElementById('scrollProgress');
+  if (scrollBar) {
+    var ticking = false;
+    function updateScrollProgress(){
+      var doc = document.documentElement;
+      var scrollTop = window.scrollY || doc.scrollTop;
+      var height = doc.scrollHeight - doc.clientHeight;
+      var pct = height > 0 ? Math.min(100, Math.max(0, (scrollTop / height) * 100)) : 0;
+      scrollBar.style.width = pct + '%';
+      scrollBar.setAttribute('aria-valuenow', String(Math.round(pct)));
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if (!ticking) { requestAnimationFrame(updateScrollProgress); ticking = true; }
+    }, { passive: true });
+    updateScrollProgress();
+  }
+
+  // FAQ: abertura e fechamento suaves, preservando o <details> nativo (acessível por padrão)
+  document.querySelectorAll('.faq-item').forEach(function(details){
+    var summary = details.querySelector('summary');
+    var content = details.querySelector('.a');
+    if (!summary || !content) return;
+    summary.addEventListener('click', function(e){
+      if (details.open) {
+        e.preventDefault();
+        var openHeight = content.offsetHeight;
+        content.style.height = openHeight + 'px';
+        requestAnimationFrame(function(){
+          content.style.transition = 'height .28s ease';
+          content.style.height = '0px';
+        });
+        content.addEventListener('transitionend', function onClose(){
+          details.open = false;
+          content.style.transition = '';
+          content.style.height = '';
+          content.removeEventListener('transitionend', onClose);
+        }, { once: true });
+      } else {
+        content.style.height = '0px';
+        requestAnimationFrame(function(){
+          var target = content.scrollHeight;
+          content.style.transition = 'height .28s ease';
+          content.style.height = target + 'px';
+        });
+        content.addEventListener('transitionend', function onOpen(){
+          content.style.transition = '';
+          content.style.height = '';
+          content.removeEventListener('transitionend', onOpen);
+        }, { once: true });
+      }
+    });
+  });
 })();
 </script>
 
