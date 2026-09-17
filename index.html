@@ -137,6 +137,18 @@
   .mech-card h3{ font-size:17px; margin-top:8px; }
   .mech-card p{ margin-top:8px; color:var(--ink-soft); font-size:14.5px; }
 
+  .problema-grid{ display:grid; grid-template-columns:1fr; gap:14px; margin-top:28px; }
+  @media (min-width:700px){ .problema-grid{ grid-template-columns:1fr 1fr; } }
+  .problem-card{
+    background:var(--surface); border-radius:18px; padding:20px 22px; box-shadow:var(--shadow); border:1px solid var(--border);
+    display:flex; gap:14px; align-items:flex-start;
+  }
+  .problem-card .mark{ width:30px; height:30px; flex:none; border-radius:50%; background:var(--coral); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:15px; }
+  .problem-card p{ font-size:15.5px; color:var(--ink); font-weight:600; line-height:1.5; }
+  .problema-bridge{ text-align:center; max-width:640px; margin:32px auto 0; }
+  .problema-bridge p{ font-size:17px; color:var(--ink-soft); }
+  .problema-bridge .btn{ margin-top:20px; }
+
   .areas-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:20px; }
   @media (max-width:820px){ .areas-grid{ grid-template-columns:repeat(2,1fr); } }
   @media (max-width:520px){ .areas-grid{ grid-template-columns:1fr; } }
@@ -241,11 +253,11 @@
   .stats-bar .stat b{ display:block; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:clamp(24px,4vw,32px); color:var(--coral); font-variant-numeric:tabular-nums; }
   .stats-bar .stat span{ font-size:13px; color:var(--ink-soft); font-weight:700; }
 
-  .mech-card, .area-card, .act-card, .step, .price-card, .testi-slot, .faq-item, .stats-bar .stat{
+  .mech-card, .area-card, .act-card, .step, .price-card, .testi-slot, .faq-item, .stats-bar .stat, .problem-card{
     opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease;
   }
   .mech-card.is-visible, .area-card.is-visible, .act-card.is-visible, .step.is-visible,
-  .price-card.is-visible, .testi-slot.is-visible, .faq-item.is-visible, .stats-bar .stat.is-visible{
+  .price-card.is-visible, .testi-slot.is-visible, .faq-item.is-visible, .stats-bar .stat.is-visible, .problem-card.is-visible{
     opacity:1; transform:translateY(0);
   }
 
@@ -318,7 +330,8 @@
       <h1>Menos crise, mais rotina previsível pro seu filho no espectro.</h1>
       <p class="lead">Nada de rolar a internet tentando adivinhar o que serve. Conte pra gente o momento que vocês estão vivendo e o Mapa monta o caminho certo — pela idade, pelo nível de comunicação e pelo desafio real do seu filho agora.</p>
       <div class="cta-row">
-        <a href="#atividades" class="btn btn-ghost btn-lg">Ver atividades</a>
+        <a href="#quiz" class="btn btn-primary btn-lg">Descobrir o plano do meu filho</a>
+        <a href="#atividades" class="btn btn-ghost">Ver atividades primeiro</a>
       </div>
       <p class="trust">Acesso vitalício, sem mensalidade · sem cadastro pra ver seu plano</p>
     </div>
@@ -335,6 +348,25 @@
     <div class="stat"><b>100%</b><span>plano sob medida pro seu filho</span></div>
   </div>
 </div>
+
+<section id="problema" style="background:var(--sky-soft);">
+  <div class="wrap">
+    <div class="shead">
+      <span class="eyebrow" style="color:var(--coral);">Você não está sozinha nisso</span>
+      <h2>Se algum desses cenários é a sua rotina, você já sabe do que eu tô falando</h2>
+    </div>
+    <div class="problema-grid">
+      <div class="problem-card"><span class="mark">1</span><p>Você já teve que sair no meio do mercado, da festa ou da casa de alguém porque a crise começou — e todo mundo olhando.</p></div>
+      <div class="problem-card"><span class="mark">2</span><p>Você fica sem saber o que fazer entre uma sessão de terapia e outra, com medo de "fazer errado" e atrapalhar o progresso.</p></div>
+      <div class="problem-card"><span class="mark">3</span><p>Alguém já insinuou que é "falta de educação" — e você teve que engolir isso mais uma vez.</p></div>
+      <div class="problem-card"><span class="mark">4</span><p>Você já pesquisou "atividades para TEA" de madrugada e não achou nada que servisse de verdade pro seu filho.</p></div>
+    </div>
+    <div class="problema-bridge">
+      <p>Nenhuma dessas situações é falha sua. Faltava um caminho claro pro momento específico do seu filho — não mais uma lista genérica.</p>
+      <a href="#quiz" class="btn btn-primary btn-lg">Ver o plano certo pro meu filho</a>
+    </div>
+  </div>
+</section>
 
 <section id="quiz">
   <div class="wrap">
@@ -572,17 +604,17 @@
   </div>
 </section>
 
-<section id="mecanismo" style="background:var(--sky-soft);">
+<section id="mecanismo" style="background:var(--teal-soft);">
   <div class="wrap">
     <div class="shead">
-      <span class="eyebrow" style="color:var(--sky);">Como funciona</span>
+      <span class="eyebrow" style="color:var(--teal);">Como funciona</span>
       <h2>Não é uma lista solta de atividades. É um plano.</h2>
       <p>A diferença entre "ter acesso a mais de 500 atividades" e "saber exatamente qual usar essa semana" — o Mapa resolve a segunda parte.</p>
     </div>
     <div class="mech-grid">
       <div class="mech-card"><div class="num">01</div><h3>Você conta pra gente o momento de vocês</h3><p>6 perguntas sobre idade, nível de comunicação e o maior desafio de agora — cada resposta ajusta o plano pro seu filho.</p></div>
       <div class="mech-card"><div class="num">02</div><h3>Geramos seu plano</h3><p>Um recorte do acervo organizado pra esse desafio específico, não a lista inteira de uma vez.</p></div>
-      <div class="mech-card"><div class="num">03</div><h3>Você imprime e aplica</h3><p>Escolhe uma atividade do plano, imprime em minutos e usa como apoio complementar ao que já é trabalhado na terapia.</p></div>
+      <div class="mech-card"><div class="num">03</div><h3>Você imprime e aplica no mesmo dia</h3><p>Escolhe uma atividade do plano, imprime em minutos (de casa ou de uma gráfica) e usa como apoio complementar ao que já é trabalhado na terapia.</p></div>
     </div>
   </div>
 </section>
@@ -673,31 +705,12 @@
   </div>
 </section>
 
-<section id="passos" style="background:var(--sun-soft);">
-  <div class="wrap">
-    <div class="shead">
-      <span class="eyebrow" style="color:var(--sun);">Simples assim</span>
-      <h2>Do plano pronto até a criança aplicando</h2>
-    </div>
-    <div class="steps">
-      <div class="step"><div class="num-badge" style="background:var(--sky);">1</div><h3>Escolha</h3><p>Abra seu plano e escolha a atividade do dia.</p></div>
-      <div class="step"><div class="num-badge" style="background:var(--grape);">2</div><h3>Imprima</h3><p>Em minutos, direto de casa ou de uma lan house/gráfica.</p></div>
-      <div class="step"><div class="num-badge" style="background:var(--teal);">3</div><h3>Aplique</h3><p>Cada atividade já vem com instrução simples pra você guiar.</p></div>
-    </div>
-  </div>
-</section>
-
 <section id="depoimentos" style="background:var(--grass-soft);">
   <div class="wrap">
     <div class="shead">
-      <span class="eyebrow" style="color:var(--grass);">Prova real, não estatística solta</span>
-      <h2>Depoimentos de quem já está usando</h2>
-      <p>Espaço reservado — só entra aqui relato real, com nome e contexto verdadeiros. Nada fabricado.</p>
-    </div>
-    <div class="testi-grid">
-      <div class="testi-slot"><div class="avatar"></div><span>[ depoimento real — a coletar ]</span></div>
-      <div class="testi-slot"><div class="avatar"></div><span>[ depoimento real — a coletar ]</span></div>
-      <div class="testi-slot"><div class="avatar"></div><span>[ depoimento real — a coletar ]</span></div>
+      <span class="eyebrow" style="color:var(--grass);">Por que o Mapa TEA existe</span>
+      <h2>Feito por quem vê de perto a falta de material que sirva de verdade</h2>
+      <p>Pais, cuidadores e terapeutas gastam horas tentando montar apoio visual do zero, ou garimpando conteúdo solto que não encaixa na fase da criança. O Mapa TEA nasceu pra resolver essa parte — organizada, sem inventar toda semana.</p>
     </div>
     <div class="founder-box">
       <div>
@@ -705,6 +718,7 @@
         <p>Em vez de comprar depoimento pronto: as primeiras famílias entram com preço especial em troca de um retorno sincero em 7 dias — vira prova social de verdade, e ainda testa se o plano faz sentido antes de escalar mídia paga.</p>
       </div>
     </div>
+    <p class="note-dev" style="margin-top:18px;border-radius:14px;">Espaço reservado pros primeiros relatos reais — nome e contexto verdadeiros, nada fabricado.</p>
   </div>
 </section>
 
@@ -713,6 +727,7 @@
     <div class="shead">
       <span class="eyebrow" style="color:var(--coral);">Sem mensalidade</span>
       <h2>Compra única, plano personalizado, acesso vitalício</h2>
+      <p>Quiz personalizado + acervo com mais de 500 atividades nas 6 áreas de apoio, tudo num pagamento só.</p>
     </div>
     <div class="price-grid">
       <div class="price-card">
@@ -753,22 +768,6 @@
   </div>
 </section>
 
-<section id="faq" style="background:var(--grape-soft);">
-  <div class="wrap">
-    <div class="shead">
-      <span class="eyebrow" style="color:var(--grape);">Dúvidas comuns</span>
-      <h2>Perguntas frequentes</h2>
-    </div>
-    <div class="faq-list">
-      <details class="faq-item"><summary>Isso substitui a terapia do meu filho?</summary><div class="a">Não. O Mapa TEA é apoio complementar pro dia a dia em casa — o acompanhamento com terapeuta ocupacional, fonoaudiólogo, psicólogo ou psicopedagogo continua sendo essencial e não é substituído por nenhum material.</div></details>
-      <details class="faq-item"><summary>Funciona pro nível de comunicação do meu filho?</summary><div class="a">As atividades são organizadas a partir do quiz, considerando idade e nível de comunicação — cada plano puxa o que faz sentido pro momento específico da criança.</div></details>
-      <details class="faq-item"><summary>Posso usar junto com a terapia ocupacional ou fonoaudiologia?</summary><div class="a">Sim, esse é exatamente o objetivo — reforçar em casa, entre uma sessão e outra, o que já é trabalhado com os profissionais.</div></details>
-      <details class="faq-item"><summary>Preciso de experiência ou formação pra aplicar?</summary><div class="a">Não. Cada atividade vem com uma instrução curta e direta — pensada pra quem nunca aplicou nada disso antes.</div></details>
-      <details class="faq-item"><summary>Posso comercializar ou redistribuir as atividades?</summary><div class="a">O material é de uso pessoal/familiar ou para atendimento individual — não pode ser revendido ou redistribuído.</div></details>
-    </div>
-  </div>
-</section>
-
 <section id="acesso" style="background:var(--surface);">
   <div class="wrap">
     <div class="shead">
@@ -785,6 +784,30 @@
         <li><span class="ck">✓</span> Novas atividades e atualizações</li>
       </ul>
     </div>
+  </div>
+</section>
+
+<section id="faq" style="background:var(--grape-soft);">
+  <div class="wrap">
+    <div class="shead">
+      <span class="eyebrow" style="color:var(--grape);">Dúvidas comuns</span>
+      <h2>Perguntas frequentes</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item"><summary>Isso substitui a terapia do meu filho?</summary><div class="a">Não. O Mapa TEA é apoio complementar pro dia a dia em casa — o acompanhamento com terapeuta ocupacional, fonoaudiólogo, psicólogo ou psicopedagogo continua sendo essencial e não é substituído por nenhum material.</div></details>
+      <details class="faq-item"><summary>Funciona pro nível de comunicação do meu filho?</summary><div class="a">As atividades são organizadas a partir do quiz, considerando idade e nível de comunicação — cada plano puxa o que faz sentido pro momento específico da criança.</div></details>
+      <details class="faq-item"><summary>Posso usar junto com a terapia ocupacional ou fonoaudiologia?</summary><div class="a">Sim, esse é exatamente o objetivo — reforçar em casa, entre uma sessão e outra, o que já é trabalhado com os profissionais.</div></details>
+      <details class="faq-item"><summary>Preciso de experiência ou formação pra aplicar?</summary><div class="a">Não. Cada atividade vem com uma instrução curta e direta — pensada pra quem nunca aplicou nada disso antes.</div></details>
+      <details class="faq-item"><summary>Posso comercializar ou redistribuir as atividades?</summary><div class="a">O material é de uso pessoal/familiar ou para atendimento individual — não pode ser revendido ou redistribuído.</div></details>
+    </div>
+  </div>
+</section>
+
+<section id="cta-final" style="background:var(--coral); position:relative; overflow:hidden;">
+  <div class="wrap" style="text-align:center; position:relative; z-index:1;">
+    <h2 style="color:#fff; font-size:clamp(26px,4vw,36px);">Seu filho não precisa de mais uma lista genérica. Precisa do plano certo pra fase de agora.</h2>
+    <p style="color:#ffe8e6; margin-top:14px; font-size:16.5px; max-width:56ch; margin-inline:auto;">Perguntas sobre o momento real de vocês, garantia de 7 dias, e você já sai daqui com um caminho — não mais uma pesquisa em aberto.</p>
+    <a href="#quiz" class="btn btn-lg" style="margin-top:26px; background:#fff; color:var(--coral);">Descobrir o plano do meu filho</a>
   </div>
 </section>
 </main>
@@ -975,7 +998,7 @@
     yearEl.textContent = '© ' + new Date().getFullYear() + ' Mapa TEA. Todos os direitos reservados.';
   }
 
-  var revealSelector = '.mech-card, .area-card, .act-card, .step, .price-card, .testi-slot, .faq-item, .stats-bar .stat';
+  var revealSelector = '.mech-card, .area-card, .act-card, .step, .price-card, .testi-slot, .faq-item, .stats-bar .stat, .problem-card';
   var revealEls = document.querySelectorAll(revealSelector);
   if ('IntersectionObserver' in window) {
     var revealObserver = new IntersectionObserver(function(entries){
