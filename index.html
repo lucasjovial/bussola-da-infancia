@@ -10,9 +10,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mapa TEA — Rotina visual e atividades adaptadas</title>
-<meta name="description" content="Quiz de 2 minutos que monta o plano certo de rotina visual e atividades adaptadas pro dia a dia do seu filho no espectro.">
-<meta property="og:title" content="Mapa TEA — Rotina visual e atividades adaptadas">
+<title>Mapa TEA — Menos crise, mais rotina previsível</title>
+<meta name="description" content="Quiz de 2 minutos que monta o plano certo de rotina visual e atividades adaptadas pro seu filho no espectro. Menos crise, mais previsibilidade.">
+<meta property="og:title" content="Mapa TEA — Menos crise, mais rotina previsível">
 <meta property="og:description" content="Rotina visual e atividades adaptadas pro dia a dia do seu filho no espectro. O reforço certo entre uma sessão de terapia e outra.">
 <meta property="og:type" content="website">
 <!-- SUBSTITUA: URL da imagem de compartilhamento (og:image), 1200x630 -->
@@ -56,7 +56,11 @@
   a{ color:inherit; }
   img{ max-width:100%; }
   .wrap{ max-width:1080px; margin:0 auto; padding-inline:20px; }
-  .eyebrow{ font-family:'Baloo 2',sans-serif; font-weight:600; font-size:13px; letter-spacing:.04em; text-transform:uppercase; }
+  .eyebrow{
+    font-family:'Baloo 2',sans-serif; font-weight:600; font-size:13px; letter-spacing:.04em; text-transform:uppercase;
+    display:inline-block; padding:6px 14px; border-radius:100px;
+    background:color-mix(in srgb, currentColor 14%, transparent);
+  }
   section{ padding-block:64px; }
   .btn{
     display:inline-flex; align-items:center; justify-content:center; gap:8px;
@@ -209,6 +213,13 @@
 
   .note-dev{ background:#fff3de; border:1px dashed var(--sun); color:#8a5c14; font-size:12.5px; padding:10px 16px; text-align:center; }
 
+  #mecanismo, #passos, #depoimentos, #atividades{ position:relative; overflow:hidden; }
+  #mecanismo::before{ content:''; position:absolute; width:260px; height:260px; border-radius:50%; background:var(--sky); opacity:.14; top:-90px; right:-60px; pointer-events:none; }
+  #passos::before{ content:''; position:absolute; width:220px; height:220px; border-radius:50%; background:var(--sun); opacity:.18; bottom:-70px; left:-50px; pointer-events:none; }
+  #depoimentos::before{ content:''; position:absolute; width:200px; height:200px; border-radius:50%; background:var(--grass); opacity:.14; top:-60px; left:-40px; pointer-events:none; }
+  #atividades::before{ content:''; position:absolute; width:240px; height:240px; border-radius:50%; background:var(--coral); opacity:.12; bottom:-80px; right:-50px; pointer-events:none; }
+  #mecanismo .wrap, #passos .wrap, #depoimentos .wrap, #atividades .wrap{ position:relative; z-index:1; }
+
   .stats-bar{ display:flex; flex-direction:column; gap:16px; text-align:center; padding-block:8px 0; }
   @media (min-width:640px){ .stats-bar{ flex-direction:row; justify-content:center; gap:48px; } }
   .stats-bar .stat b{ display:block; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:clamp(24px,4vw,32px); color:var(--coral); font-variant-numeric:tabular-nums; }
@@ -288,7 +299,7 @@
   <div class="wrap hero-grid">
     <div>
       <span class="eyebrow">Rotina visual e atividades adaptadas · TEA</span>
-      <h1>Rotina visual e atividades adaptadas pro dia a dia do seu filho no espectro.</h1>
+      <h1>Menos crise, mais rotina previsível pro seu filho no espectro.</h1>
       <p class="lead">Nada de rolar a internet tentando adivinhar o que serve. Responda um miniquestionário rápido (é rapidinho, e tem elogio no meio do caminho) e o Mapa monta, na hora, o caminho certo — pela idade, pelo nível de comunicação e pelo desafio real que vocês estão vivendo agora.</p>
       <div class="cta-row">
         <a href="#atividades" class="btn btn-ghost btn-lg">Ver atividades</a>
@@ -550,7 +561,7 @@
   </div>
 </section>
 
-<section id="mecanismo">
+<section id="mecanismo" style="background:var(--sky-soft);">
   <div class="wrap">
     <div class="shead">
       <span class="eyebrow" style="color:var(--sky);">Como funciona</span>
@@ -582,7 +593,7 @@
   </div>
 </section>
 
-<section id="atividades">
+<section id="atividades" style="background:var(--coral-soft);">
   <div class="wrap">
     <div class="shead">
       <span class="eyebrow" style="color:var(--coral);">Amostra da coleção</span>
@@ -627,21 +638,21 @@
   </div>
 </section>
 
-<section id="passos" style="background:var(--surface);">
+<section id="passos" style="background:var(--sun-soft);">
   <div class="wrap">
     <div class="shead">
       <span class="eyebrow" style="color:var(--sun);">Simples assim</span>
       <h2>Do plano pronto até a criança aplicando</h2>
     </div>
     <div class="steps">
-      <div class="step"><div class="num-badge">1</div><h3>Escolha</h3><p>Abra seu plano e escolha a atividade do dia.</p></div>
-      <div class="step"><div class="num-badge">2</div><h3>Imprima</h3><p>Em minutos, direto de casa ou de uma lan house/gráfica.</p></div>
-      <div class="step"><div class="num-badge">3</div><h3>Aplique</h3><p>Cada atividade já vem com instrução simples pra você guiar.</p></div>
+      <div class="step"><div class="num-badge" style="background:var(--sky);">1</div><h3>Escolha</h3><p>Abra seu plano e escolha a atividade do dia.</p></div>
+      <div class="step"><div class="num-badge" style="background:var(--grape);">2</div><h3>Imprima</h3><p>Em minutos, direto de casa ou de uma lan house/gráfica.</p></div>
+      <div class="step"><div class="num-badge" style="background:var(--teal);">3</div><h3>Aplique</h3><p>Cada atividade já vem com instrução simples pra você guiar.</p></div>
     </div>
   </div>
 </section>
 
-<section id="depoimentos">
+<section id="depoimentos" style="background:var(--grass-soft);">
   <div class="wrap">
     <div class="shead">
       <span class="eyebrow" style="color:var(--grass);">Prova real, não estatística solta</span>
@@ -707,7 +718,7 @@
   </div>
 </section>
 
-<section id="faq">
+<section id="faq" style="background:var(--grape-soft);">
   <div class="wrap">
     <div class="shead">
       <span class="eyebrow" style="color:var(--grape);">Dúvidas comuns</span>
