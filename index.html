@@ -96,6 +96,7 @@
   .hero .cta-row{ margin-top:26px; display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
   .hero .trust{ margin-top:16px; font-size:13.5px; color:var(--ink-faint); font-weight:700; }
   .hero-art{ position:relative; aspect-ratio:1/1; }
+  .hero-art img{ width:100%; height:100%; object-fit:contain; display:block; }
   .blob{ position:absolute; border-radius:42% 58% 63% 37% / 41% 44% 56% 59%; }
 
   .quiz-section{ background:var(--surface-2); border-radius:32px; margin-inline:auto; }
@@ -313,27 +314,8 @@
       </div>
       <p class="trust">Acesso vitalício, sem mensalidade · sem cadastro pra ver seu plano</p>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      <svg viewBox="0 0 400 400" width="100%">
-        <circle cx="130" cy="120" r="95" fill="#E3F3FB"/>
-        <circle cx="290" cy="270" r="70" fill="#FFF3DE"/>
-        <path d="M60 260 Q120 200 190 255 T330 240" stroke="#8B6BD1" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="2 18"/>
-        <g transform="translate(120,110)">
-          <circle r="46" fill="#FF6B6B"/>
-          <circle r="16" fill="#fff"/>
-          <path d="M0 -34 L6 -6 L0 4 L-6 -6 Z" fill="#fff"/>
-        </g>
-        <g transform="translate(250,180)">
-          <rect x="-30" y="-30" width="60" height="60" rx="14" fill="#3FAE7C"/>
-          <path d="M-12 0 L-3 10 L14 -10" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        </g>
-        <g transform="translate(300,90)">
-          <polygon points="0,-24 7,-7 26,-7 11,5 16,24 0,13 -16,24 -11,5 -26,-7 -7,-7" fill="#FFB648"/>
-        </g>
-        <g transform="translate(90,300)">
-          <circle r="26" fill="#1FA39A"/>
-        </g>
-      </svg>
+    <div class="hero-art">
+      <img src="img/capa-produto.png" alt="Amostra das atividades do Mapa TEA e selo de acesso vitalício" width="600" height="600" loading="eager" fetchpriority="high">
     </div>
   </div>
 </section>
