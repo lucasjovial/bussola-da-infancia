@@ -11,7 +11,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mapa TEA — Menos crise, mais rotina previsível</title>
-<meta name="description" content="Quiz de 2 minutos que monta o plano certo de rotina visual e atividades adaptadas pro seu filho no espectro. Menos crise, mais previsibilidade.">
+<meta name="description" content="Conte pra gente o momento do seu filho e receba o plano certo de rotina visual e atividades adaptadas. Menos crise, mais previsibilidade.">
 <meta property="og:title" content="Mapa TEA — Menos crise, mais rotina previsível">
 <meta property="og:description" content="Rotina visual e atividades adaptadas pro dia a dia do seu filho no espectro. O reforço certo entre uma sessão de terapia e outra.">
 <meta property="og:type" content="website">
@@ -154,7 +154,9 @@
   .act-card{ background:var(--surface); border:1px solid var(--border); border-radius:18px; overflow:hidden; box-shadow:var(--shadow); }
   .act-card .art{ aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; overflow:hidden; }
   .act-card .art img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .quiz-avatar{ width:64px; height:64px; border-radius:50%; object-fit:cover; display:block; margin:0 auto 14px; border:3px solid var(--surface); box-shadow:var(--shadow); }
+  .quiz-avatar{ width:64px; height:64px; border-radius:50%; object-fit:cover; display:block; margin:0 auto 12px; border:3px solid var(--surface); box-shadow:var(--shadow); }
+  .quiz-avatar[hidden]{ display:none; }
+  .quiz-intro{ text-align:center; font-size:13.5px; color:var(--ink-faint); margin-bottom:18px; }
   .guarantee .badge-img{ width:84px; height:84px; object-fit:contain; flex:none; }
   .act-card .body{ padding:14px 16px 18px; }
   .act-card .tag{ font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
@@ -303,7 +305,7 @@
     <div>
       <span class="eyebrow">Rotina visual e atividades adaptadas · TEA</span>
       <h1>Menos crise, mais rotina previsível pro seu filho no espectro.</h1>
-      <p class="lead">Nada de rolar a internet tentando adivinhar o que serve. Responda um miniquestionário rápido (é rapidinho, e tem elogio no meio do caminho) e o Mapa monta, na hora, o caminho certo — pela idade, pelo nível de comunicação e pelo desafio real que vocês estão vivendo agora.</p>
+      <p class="lead">Nada de rolar a internet tentando adivinhar o que serve. Conte pra gente o momento que vocês estão vivendo e o Mapa monta o caminho certo — pela idade, pelo nível de comunicação e pelo desafio real do seu filho agora.</p>
       <div class="cta-row">
         <a href="#atividades" class="btn btn-ghost btn-lg">Ver atividades</a>
       </div>
@@ -338,7 +340,7 @@
   <div class="stats-bar">
     <div class="stat"><b>+500</b><span>atividades adaptadas no acervo</span></div>
     <div class="stat"><b>6</b><span>áreas de apoio</span></div>
-    <div class="stat"><b>2min</b><span>pra montar o plano</span></div>
+    <div class="stat"><b>100%</b><span>plano sob medida pro seu filho</span></div>
   </div>
 </div>
 
@@ -346,7 +348,8 @@
   <div class="wrap">
     <div class="quiz-section" style="padding:48px 20px;">
       <div class="quiz-card">
-        <img class="quiz-avatar" src="img/avatar-quiz.png" alt="" loading="lazy" width="64" height="64">
+        <img class="quiz-avatar" id="quizAvatar" src="" alt="" hidden width="64" height="64">
+        <p class="quiz-intro">Não existe resposta certa ou errada — só queremos entender o momento real de vocês.</p>
         <div class="quiz-progress">
           <span class="done" data-p="1"></span><span data-p="2"></span><span data-p="3"></span><span data-p="4"></span><span data-p="5"></span><span data-p="6"></span>
         </div>
@@ -406,7 +409,7 @@
           <div class="quiz-result">
             <span class="badge">🎉 Mandou bem</span>
             <h3 id="praise1-title">2 de 6 respondidas — já dá pra sentir o perfil dele(a)</h3>
-            <p>As próximas perguntas ajustam ainda mais o plano pra rotina de vocês. Bora continuar?</p>
+            <p id="praise1-text">As próximas perguntas ajustam ainda mais o plano pra rotina de vocês. Bora continuar?</p>
             <button class="btn btn-primary btn-lg" id="praise1-continue" style="margin-top:22px;">Continuar</button>
           </div>
         </div>
@@ -573,7 +576,7 @@
       <p>A diferença entre "ter acesso a mais de 500 atividades" e "saber exatamente qual usar essa semana" — o Mapa resolve a segunda parte.</p>
     </div>
     <div class="mech-grid">
-      <div class="mech-card"><div class="num">01</div><h3>Você responde um miniquestionário</h3><p>6 perguntinhas sobre idade, nível de comunicação e maior desafio do momento — leva menos de 2 minutos.</p></div>
+      <div class="mech-card"><div class="num">01</div><h3>Você conta pra gente o momento de vocês</h3><p>6 perguntas sobre idade, nível de comunicação e o maior desafio de agora — cada resposta ajusta o plano pro seu filho.</p></div>
       <div class="mech-card"><div class="num">02</div><h3>Geramos seu plano</h3><p>Um recorte do acervo organizado pra esse desafio específico, não a lista inteira de uma vez.</p></div>
       <div class="mech-card"><div class="num">03</div><h3>Você imprime e aplica</h3><p>Escolhe uma atividade do plano, imprime em minutos e usa como apoio complementar ao que já é trabalhado na terapia.</p></div>
     </div>
@@ -847,20 +850,40 @@
     return String(n) + answers.branch;
   }
 
+  var AVATAR_BY_BRANCH = { A: 'img/avatar-quiz-1.png', B: 'img/avatar-quiz-2.png', C: 'img/avatar-quiz-3.png', D: 'img/avatar-quiz-4.png' };
+  var quizAvatar = document.getElementById('quizAvatar');
+
   document.querySelectorAll('[data-idade]').forEach(function(btn){
     btn.addEventListener('click', function(){
       answers.idade = btn.dataset.idade;
       answers.branch = btn.dataset.branch;
+      if (quizAvatar && AVATAR_BY_BRANCH[answers.branch]) {
+        quizAvatar.src = AVATAR_BY_BRANCH[answers.branch];
+        quizAvatar.alt = 'Criança de ' + answers.idade;
+        quizAvatar.hidden = false;
+      }
       setProgress(1);
       showStep('2' + answers.branch);
     });
   });
+
+  var VALIDATION_BY_DESAFIO = {
+    rotina: "Mudança de rotina sem aviso é difícil de verdade pra vocês — muita gente de fora subestima isso.",
+    comunicacao: "Não conseguir comunicar o que precisa é frustrante pros dois lados. Isso cansa.",
+    sensorial: "Sobrecarga sensorial cansa muito — pra ele(a), e pra você também.",
+    social: "Ver ele(a) sem se aproximar de outras crianças mexe com qualquer mãe ou pai."
+  };
 
   document.querySelectorAll('[data-desafio]').forEach(function(btn){
     btn.addEventListener('click', function(){
       answers.desafio = btn.dataset.desafio;
       setProgress(2);
       document.getElementById('praise1-title').textContent = '2 de 6 respondidas — já sabemos o que pega nessa fase de ' + answers.idade;
+      var praiseText = document.getElementById('praise1-text');
+      if (praiseText) {
+        var validation = VALIDATION_BY_DESAFIO[answers.desafio] || '';
+        praiseText.textContent = (validation ? validation + ' ' : '') + 'As próximas perguntas ajudam a montar o plano certo pra isso.';
+      }
       showStep('praise1');
     });
   });
