@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://bussola-da-infancia.vercel.app/og-image.png">
 <meta name="theme-color" content="#fdfaf2">
 <link rel="canonical" href="https://bussola-da-infancia.vercel.app/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='19' fill='%23FF6B6B'/%3E%3Ccircle cx='20' cy='20' r='7' fill='%23fff'/%3E%3Cpath d='M20 6 L22 17 L20 20 L18 17 Z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='19' fill='%23FF4757'/%3E%3Ccircle cx='20' cy='20' r='7' fill='%23fff'/%3E%3Cpath d='M20 6 L22 17 L20 20 L18 17 Z' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -35,15 +35,15 @@
     --ink-faint:#8f97a8;
     --border:#ece3cf;
 
-    --sky:#2f9bd6;    --sky-soft:#e3f3fb;
-    --sun:#ffb648;    --sun-soft:#fff3de;
-    --coral:#ff6b6b;  --coral-soft:#ffe8e6;
-    --grass:#3fae7c;  --grass-soft:#e2f5eb;
-    --grape:#8b6bd1;  --grape-soft:#eee7fa;
-    --teal:#1fa39a;   --teal-soft:#dff5f2;
+    --sky:#0ea5e9;    --sky-soft:#cdeefd;
+    --sun:#ffc700;    --sun-soft:#fff0b3;
+    --coral:#ff4757;  --coral-soft:#ffd9dc;
+    --grass:#22c55e;  --grass-soft:#c8f2d9;
+    --grape:#9333ea;  --grape-soft:#e9d5fb;
+    --olive:#7c8b2e;  --olive-soft:#e4e8c6;
 
     --good:#3fae7c;
-    --cta-rgb: 255,107,107;
+    --cta-rgb: 255,71,87;
     --shadow: 0 2px 4px rgba(35,48,67,.06), 0 12px 28px -14px rgba(35,48,67,.22);
     --radius: 20px;
   }
@@ -78,8 +78,8 @@
   .btn:hover{ transform:translateY(-2px); }
   .btn:active{ transform:translateY(0) scale(.98); }
   .btn:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
-  .btn-primary{ background:var(--coral); color:#fff; box-shadow:0 10px 22px -8px rgba(255,107,107,.55); }
-  .btn-primary:hover{ box-shadow:0 14px 26px -8px rgba(255,107,107,.6); }
+  .btn-primary{ background:var(--coral); color:#fff; box-shadow:0 10px 22px -8px rgba(255,71,87,.55); }
+  .btn-primary:hover{ box-shadow:0 14px 26px -8px rgba(255,71,87,.6); }
   .btn-ghost{ background:var(--surface); color:var(--ink); border:2px solid var(--border); }
   .btn-ghost:hover{ border-color:var(--coral); }
   .btn-lg{ padding:18px 38px; font-size:19px; }
@@ -97,7 +97,7 @@
   }
   header.site .bar{ display:flex; align-items:center; justify-content:space-between; padding-block:14px; gap:16px; }
   .logo{ display:flex; align-items:center; gap:10px; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:19px; }
-  .logo .mark{ width:34px; height:34px; flex:none; }
+  .logo .mark{ width:34px; height:34px; flex:none; border-radius:50%; object-fit:cover; display:block; }
   nav.links{ display:flex; gap:22px; font-weight:700; font-size:14.5px; color:var(--ink-soft); }
   nav.links a:hover{ color:var(--coral); }
   @media (max-width:720px){ nav.links{ display:none; } }
@@ -169,7 +169,7 @@
   .quiz-opt[disabled]{ cursor:default; }
   .quiz-opt.selected{
     border-color:var(--coral); background:var(--coral-soft);
-    box-shadow:0 4px 14px -6px rgba(255,107,107,.5);
+    box-shadow:0 4px 14px -6px rgba(255,71,87,.5);
   }
   .quiz-opt.selected::after{
     content:'✓'; position:absolute; right:14px; top:50%; transform:translateY(-50%);
@@ -216,12 +216,12 @@
   .area-card .icon{ width:44px; height:44px; }
   .area-card h3{ font-size:16.5px; margin-top:12px; }
   .area-card p{ margin-top:6px; font-size:13.5px; }
-  .area-1{ background:var(--sky-soft); } .area-1 p{ color:#2b7196; }
-  .area-2{ background:var(--grape-soft); } .area-2 p{ color:#6a4fa8; }
-  .area-3{ background:var(--coral-soft); } .area-3 p{ color:#c94b4b; }
-  .area-4{ background:var(--sun-soft); } .area-4 p{ color:#b47417; }
-  .area-5{ background:var(--grass-soft); } .area-5 p{ color:#2c8a5e; }
-  .area-6{ background:var(--teal-soft); } .area-6 p{ color:#187a73; }
+  .area-1{ background:var(--sky-soft); } .area-1 p{ color:#0b6b93; }
+  .area-2{ background:var(--grape-soft); } .area-2 p{ color:#6b21a8; }
+  .area-3{ background:var(--coral-soft); } .area-3 p{ color:#c81e2c; }
+  .area-4{ background:var(--sun-soft); } .area-4 p{ color:#7a5c00; }
+  .area-5{ background:var(--grass-soft); } .area-5 p{ color:#15803d; }
+  .area-6{ background:var(--olive-soft); } .area-6 p{ color:#545e1f; }
 
   .act-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:20px; }
   @media (max-width:900px){ .act-grid{ grid-template-columns:repeat(2,1fr); } }
@@ -367,11 +367,7 @@
 <header class="site">
   <div class="wrap bar">
     <div class="logo">
-      <svg class="mark" viewBox="0 0 40 40" fill="none">
-        <circle cx="20" cy="20" r="19" fill="#FF6B6B"/>
-        <circle cx="20" cy="20" r="7" fill="#fff"/>
-        <path d="M20 6 L22 17 L20 20 L18 17 Z" fill="#fff"/>
-      </svg>
+      <img class="mark" src="img/logo-mark.webp" alt="" width="34" height="34" loading="eager">
       Mapa TEA
     </div>
     <nav class="links">
@@ -669,10 +665,10 @@
   </div>
 </section>
 
-<section id="mecanismo" style="background:var(--teal-soft);">
+<section id="mecanismo" style="background:var(--olive-soft);">
   <div class="wrap">
     <div class="shead">
-      <span class="eyebrow" style="color:var(--teal);">Como funciona</span>
+      <span class="eyebrow" style="color:var(--olive);">Como funciona</span>
       <h2>Não é uma lista solta de atividades. É um plano.</h2>
       <p>A diferença entre "ter acesso a mais de 500 atividades" e "saber exatamente qual usar essa semana" — o Mapa resolve a segunda parte.</p>
     </div>
@@ -691,12 +687,12 @@
       <h2>Cada atividade tem um propósito, não só uma cor bonita</h2>
     </div>
     <div class="areas-grid">
-      <div class="area-card area-1"><svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#2F9BD6"/><path d="M14 30 Q20 16 24 24 T34 18" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg><h3>Rotina e Antecipação</h3><p>Cartões visuais de sequência e apoio pra transição entre atividades.</p></div>
-      <div class="area-card area-2"><svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#8B6BD1"/><path d="M14 17h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H21l-5 5v-5h-2a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3Z" fill="#fff"/></svg><h3>Comunicação</h3><p>Apoio visual pra expressar necessidade, escolha e emoção, mesmo antes da fala.</p></div>
-      <div class="area-card area-3"><svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#FF6B6B"/><circle cx="17" cy="22" r="4" fill="#fff"/><circle cx="31" cy="22" r="4" fill="#fff"/><path d="M16 32 Q24 26 32 32" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg><h3>Regulação Sensorial</h3><p>Atividades calmas pra identificar gatilho e reduzir sobrecarga.</p></div>
-      <div class="area-card area-4"><svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#FFB648"/><path d="M24 14 L24 30 M17 23 L24 30 L31 23" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Autonomia e Habilidades do Dia a Dia</h3><p>Passo a passo visual pra vestir-se, higiene e alimentação, com autonomia.</p></div>
-      <div class="area-card area-5"><svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#3FAE7C"/><circle cx="18" cy="22" r="7" fill="#fff"/><circle cx="30" cy="22" r="7" fill="#fff" opacity=".55"/></svg><h3>Interação Social</h3><p>Convites curtos de interação, no tempo da criança, sem pressão.</p></div>
-      <div class="area-card area-6"><svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#1FA39A"/><path d="M15 20 h18 M15 26 h12" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg><h3>Coordenação Motora e Atenção</h3><p>Traçados e desafios de atenção adaptados ao ritmo sensorial da criança.</p></div>
+      <div class="area-card area-1"><svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#0EA5E9"/><path d="M14 30 Q20 16 24 24 T34 18" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg><h3>Rotina e Antecipação</h3><p>Cartões visuais de sequência e apoio pra transição entre atividades.</p></div>
+      <div class="area-card area-2"><svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#9333EA"/><path d="M14 17h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H21l-5 5v-5h-2a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3Z" fill="#fff"/></svg><h3>Comunicação</h3><p>Apoio visual pra expressar necessidade, escolha e emoção, mesmo antes da fala.</p></div>
+      <div class="area-card area-3"><svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#FF4757"/><circle cx="17" cy="22" r="4" fill="#fff"/><circle cx="31" cy="22" r="4" fill="#fff"/><path d="M16 32 Q24 26 32 32" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg><h3>Regulação Sensorial</h3><p>Atividades calmas pra identificar gatilho e reduzir sobrecarga.</p></div>
+      <div class="area-card area-4"><svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#FFC700"/><path d="M24 14 L24 30 M17 23 L24 30 L31 23" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Autonomia e Habilidades do Dia a Dia</h3><p>Passo a passo visual pra vestir-se, higiene e alimentação, com autonomia.</p></div>
+      <div class="area-card area-5"><svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#22C55E"/><circle cx="18" cy="22" r="7" fill="#fff"/><circle cx="30" cy="22" r="7" fill="#fff" opacity=".55"/></svg><h3>Interação Social</h3><p>Convites curtos de interação, no tempo da criança, sem pressão.</p></div>
+      <div class="area-card area-6"><svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#7C8B2E"/><path d="M15 20 h18 M15 26 h12" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg><h3>Coordenação Motora e Atenção</h3><p>Traçados e desafios de atenção adaptados ao ritmo sensorial da criança.</p></div>
     </div>
   </div>
 </section>
@@ -711,59 +707,59 @@
     <div class="act-grid">
       <div class="act-card">
         <div class="art"><img src="img/atividade-04-minha-rotina.webp" alt="Cartões de rotina visual e amarrar o cadarço" loading="lazy" width="300" height="225"></div>
-        <div class="body"><span class="tag" style="color:#2b7196;">Rotina</span><h4>Minha Rotina do Dia</h4></div>
+        <div class="body"><span class="tag" style="color:#0b6b93;">Rotina</span><h4>Minha Rotina do Dia</h4></div>
       </div>
       <div class="act-card">
         <div class="art"><img src="img/atividade-10-ordem-chegada.webp" alt="Atividade de ordenar carrinhos em sequência" loading="lazy" width="300" height="225"></div>
-        <div class="body"><span class="tag" style="color:#2b7196;">Rotina</span><h4>Ordem de Chegada</h4></div>
+        <div class="body"><span class="tag" style="color:#0b6b93;">Rotina</span><h4>Ordem de Chegada</h4></div>
       </div>
       <div class="act-card">
         <div class="art"><img src="img/atividade-14-qual-placa.webp" alt="Atividade de associar veículo à placa correspondente" loading="lazy" width="300" height="225"></div>
-        <div class="body"><span class="tag" style="color:#6a4fa8;">Comunicação</span><h4>Qual é a Placa?</h4></div>
+        <div class="body"><span class="tag" style="color:#6b21a8;">Comunicação</span><h4>Qual é a Placa?</h4></div>
       </div>
       <div class="act-card">
         <div class="art"><img src="img/atividade-07-organize-banheiro.webp" alt="Atividade de associar objeto à silhueta no banheiro" loading="lazy" width="300" height="225"></div>
-        <div class="body"><span class="tag" style="color:#b47417;">Autonomia</span><h4>Organize o Banheiro</h4></div>
+        <div class="body"><span class="tag" style="color:#7a5c00;">Autonomia</span><h4>Organize o Banheiro</h4></div>
       </div>
       <div class="act-card">
         <div class="art"><img src="img/atividade-09-lista-compras.webp" alt="Atividade de recortar e colar itens da lista de compras" loading="lazy" width="300" height="225"></div>
-        <div class="body"><span class="tag" style="color:#b47417;">Autonomia</span><h4>Lista de Compras</h4></div>
+        <div class="body"><span class="tag" style="color:#7a5c00;">Autonomia</span><h4>Lista de Compras</h4></div>
       </div>
       <div class="act-card">
         <div class="art"><img src="img/atividade-12-vista-boneca.webp" alt="Atividade de faz de conta de vestir o boneco" loading="lazy" width="300" height="225"></div>
-        <div class="body"><span class="tag" style="color:#2c8a5e;">Social</span><h4>Vista o Boneco</h4></div>
+        <div class="body"><span class="tag" style="color:#15803d;">Social</span><h4>Vista o Boneco</h4></div>
       </div>
       <div class="act-card">
         <div class="art"><img src="img/atividade-02-trilha-labirinto.webp" alt="Atividade de traçado, labirinto e coordenação motora" loading="lazy" width="300" height="225"></div>
-        <div class="body"><span class="tag" style="color:#187a73;">Motor/Atenção</span><h4>Trilha e Labirinto</h4></div>
+        <div class="body"><span class="tag" style="color:#545e1f;">Motor/Atenção</span><h4>Trilha e Labirinto</h4></div>
       </div>
       <div class="act-card">
         <div class="art"><img src="img/atividade-01-complete-padrao.webp" alt="Atividade de completar padrões e sequência lógica" loading="lazy" width="300" height="225"></div>
-        <div class="body"><span class="tag" style="color:#187a73;">Motor/Atenção</span><h4>Complete o Padrão</h4></div>
+        <div class="body"><span class="tag" style="color:#545e1f;">Motor/Atenção</span><h4>Complete o Padrão</h4></div>
       </div>
       <div class="act-card">
         <div class="art"><img src="img/atividade-03-igual-diferente.webp" alt="Atividade de encontrar diferenças e associar iguais" loading="lazy" width="300" height="225"></div>
-        <div class="body"><span class="tag" style="color:#187a73;">Motor/Atenção</span><h4>Igual ou Diferente</h4></div>
+        <div class="body"><span class="tag" style="color:#545e1f;">Motor/Atenção</span><h4>Igual ou Diferente</h4></div>
       </div>
       <div class="act-card">
         <div class="art"><img src="img/atividade-05-encontre-detalhe.webp" alt="Atividade de associar fruta ao detalhe correspondente" loading="lazy" width="300" height="225"></div>
-        <div class="body"><span class="tag" style="color:#187a73;">Motor/Atenção</span><h4>Encontre o Detalhe</h4></div>
+        <div class="body"><span class="tag" style="color:#545e1f;">Motor/Atenção</span><h4>Encontre o Detalhe</h4></div>
       </div>
       <div class="act-card">
         <div class="art"><img src="img/atividade-06-animais-escondidos.webp" alt="Atividade de encontrar animais escondidos na cena" loading="lazy" width="300" height="225"></div>
-        <div class="body"><span class="tag" style="color:#187a73;">Motor/Atenção</span><h4>Animais Escondidos</h4></div>
+        <div class="body"><span class="tag" style="color:#545e1f;">Motor/Atenção</span><h4>Animais Escondidos</h4></div>
       </div>
       <div class="act-card">
         <div class="art"><img src="img/atividade-08-carregando-caminhao.webp" alt="Atividade de encaixar peças no caminhão" loading="lazy" width="300" height="225"></div>
-        <div class="body"><span class="tag" style="color:#187a73;">Motor/Atenção</span><h4>Carregando o Caminhão</h4></div>
+        <div class="body"><span class="tag" style="color:#545e1f;">Motor/Atenção</span><h4>Carregando o Caminhão</h4></div>
       </div>
       <div class="act-card">
         <div class="art"><img src="img/atividade-11-quantos-tem.webp" alt="Atividade de contar animais do fundo do mar" loading="lazy" width="300" height="225"></div>
-        <div class="body"><span class="tag" style="color:#187a73;">Motor/Atenção</span><h4>Quantos Tem?</h4></div>
+        <div class="body"><span class="tag" style="color:#545e1f;">Motor/Atenção</span><h4>Quantos Tem?</h4></div>
       </div>
       <div class="act-card">
         <div class="art"><img src="img/atividade-13-peixinho-lugar-certo.webp" alt="Atividade de associar peixinho colorido ao aquário certo" loading="lazy" width="300" height="225"></div>
-        <div class="body"><span class="tag" style="color:#187a73;">Motor/Atenção</span><h4>Peixinho no Lugar Certo</h4></div>
+        <div class="body"><span class="tag" style="color:#545e1f;">Motor/Atenção</span><h4>Peixinho no Lugar Certo</h4></div>
       </div>
     </div>
     <p class="note-dev" style="margin-top:22px;border-radius:14px;">Estas 14 são a coleção-semente — fixam o formato e o padrão visual. A coleção completa com mais de 500 atividades vem em seguida, em PDFs prontos pra imprimir, no mesmo estilo.</p>
